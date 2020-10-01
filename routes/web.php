@@ -1,0 +1,38 @@
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('home');
+});
+
+Auth::routes(['register' => false]);
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['prefix' => 'clients'], function () {
+    Route::get('/registration-form', 'ClientController@clientsRegisterForm')->name('clients.registration.form');
+    Route::get('/registration/phone-is-available', 'ClientController@clientsRegisterPhone')->name('clients.registration.phone');
+    Route::get('/registration/email-is-available', 'ClientController@clientsRegisterEmail')->name('clients.registration.email');
+    Route::post('/registration', 'ClientController@clientsRegister')->name('clients.registration');
+    Route::get('/verification/{token}', 'ClientController@emailVerification')->name('clients.verification');
+    Route::get('/login-form', 'ClientController@clientsLoginForm')->name('clients.login.form');
+    Route::post('/login', 'ClientController@clientsLogin')->name('clients.login');
+    Route::get('/forgot-password-form', 'ClientController@clientsForgotPasswordForm')->name('clients.forgot.password.form');
+    Route::post('/password-reset', 'ClientController@clientsResetPassword')->name('clients.password.reset.link');
+    Route::get('/reset-password-form', 'ClientController@clientsResetPasswordForm')->name('clients.reset.password.form');
+    Route::post('/password-update', 'ClientController@clientsResetPasswordUpdate')->name('clients.password.update');
+});
+
+Route::group(['prefix' => 'clients'], function (){
+    Route::get('/dashboard', 'DashboardController@index')->name('clients.dashboard');
+});
