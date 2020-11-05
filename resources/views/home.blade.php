@@ -1,93 +1,28 @@
 @extends('layouts.app-web')
 
 @section('slider')
-    <section class="w3l-main-slider" id="app">
-        <div class="banner-content">
-            <div class="owl-one owl-carousel owl-theme">
-                <div class="item">
-                    <li>
-                        <div class="slider-info banner-view bg bg2">
-                            <div class="banner-info">
-                                <div class="container">
-                                    <div class="banner-info-bg">
-                                        <h4 style="color: #fe346e">Trusted Our main goal</h4>
-                                        <h5>Welcome to WebMedical Service</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </div>
-                <div class="item">
-                    <li>
-                        <div class="slider-info  banner-view banner-top1 bg bg2">
-                            <div class="banner-info">
-                                <div class="container">
-                                    <div class="banner-info-bg">
-                                        <h4 style="color: #fe346e">Care for your smile</h4>
-                                        <h5>Get all the essential
-                                            Medical service here</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </div>
-                <div class="item">
-                    <li>
-                        <div class="slider-info banner-view banner-top2 bg bg2">
-                            <div class="banner-info">
-                                <div class="container">
-                                    <div class="banner-info-bg">
-                                        <h4 style="color: #fe346e">We are WebMedical</h4>
-                                        <h5>Experience, trust and proven success
-                                        </h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </div>
-                <div class="item">
-                    <li>
-                        <div class="slider-info banner-view banner-top3 bg bg2">
-                            <div class="banner-info">
-                                <div class="container">
-                                    <div class="banner-info-bg">
-                                        <h4 style="color: #fe346e">WebMedical</h4>
-                                        <h5>1 Month Free Service, for test purpose</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </div>
-            </div>
-            <ul class="slide-social-icons list-unstyled">
-                <li class="share">Share On : </li>
-                <li>
-                    <a href="#" class="w3pvt_facebook">
-                        <span class="fa fa-facebook-f"></span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="w3pvt_twitter">
-                        <span class="fa fa-twitter"></span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="w3pvt_dribble">
-                        <span class="fa fa-dribbble"></span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="w3pvt_google">
-                        <span class="fa fa-google-plus"></span>
-                    </a>
-                </li>
-            </ul>
+    <div class="slideshow-container">
+
+        <div class="mySlides fade">
+            <img src="{{ asset('fontend/assets/images/banner.png') }}" style="width:100%">
         </div>
-    </section>
+
+        <div class="mySlides fade">
+            <img src="{{ asset('fontend/assets/images/banner0.jpg') }}" style="width:100%">
+        </div>
+
+        <div class="mySlides fade">
+            <img src="{{ asset('fontend/assets/images/banner1.jpg') }}" style="width:100%">
+        </div>
+
+    </div>
+    <br>
+
+    <div style="text-align:center">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>
 @endsection
 @section('content')
     <section class="w3l-content-6">

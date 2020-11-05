@@ -34,5 +34,6 @@ Route::group(['prefix' => 'clients'], function () {
 });
 
 Route::group(['prefix' => 'clients'], function (){
+    Route::get('/{anypath}', 'DashboardController@index')->where('path', '.*');
     Route::get('/dashboard', 'DashboardController@index')->name('clients.dashboard');
 });
