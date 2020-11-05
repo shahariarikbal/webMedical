@@ -1,5 +1,5 @@
 <template>
-    <h2>Doctor List component</h2>
+    <h2>Manage All Doctors</h2>
 </template>
 
 <script>
