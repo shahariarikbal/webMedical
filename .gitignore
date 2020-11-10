@@ -1,7 +1,6 @@
 /node_modules
 /public/hot
 /public/storage
-/public/fontend
 /storage/*.key
 /vendor
 .env
