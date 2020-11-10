@@ -7201,7 +7201,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#doctors[data-v-b5454df0] {\n    font-family: Arial, Helvetica, sans-serif;\n    border-collapse: collapse;\n    width: 100%;\n}\n#doctors td[data-v-b5454df0], #doctors th[data-v-b5454df0] {\n    border: 1px solid #ddd;\n    padding: 8px;\n}\n#doctors tr[data-v-b5454df0]:nth-child(even){background-color: #f2f2f2;}\n#doctors tr[data-v-b5454df0]:hover {background-color: #ddd;}\n#doctors th[data-v-b5454df0] {\n    padding-top: 12px;\n    padding-bottom: 12px;\n    text-align: left;\n    background-color: #4CAF50;\n    color: white;\n}\n.manage-font[data-v-b5454df0] {\n    font-size: 15px;\n}\n.new-doctor[data-v-b5454df0] {\n    font-size: 24px;\n}\n", ""]);
+exports.push([module.i, "\n#doctors[data-v-b5454df0] {\r\n    font-family: Arial, Helvetica, sans-serif;\r\n    border-collapse: collapse;\r\n    width: 100%;\n}\n#doctors td[data-v-b5454df0], #doctors th[data-v-b5454df0] {\r\n    border: 1px solid #ddd;\r\n    padding: 8px;\n}\n#doctors tr[data-v-b5454df0]:nth-child(even){background-color: #f2f2f2;}\n#doctors tr[data-v-b5454df0]:hover {background-color: #ddd;}\n#doctors th[data-v-b5454df0] {\r\n    padding-top: 12px;\r\n    padding-bottom: 12px;\r\n    text-align: left;\r\n    background-color: #4CAF50;\r\n    color: white;\n}\n.manage-font[data-v-b5454df0] {\r\n    font-size: 15px;\n}\n.new-doctor[data-v-b5454df0] {\r\n    font-size: 24px;\n}\r\n", ""]);
 
 // exports
 
@@ -59507,8 +59507,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\webmedical\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\webmedical\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\xampp\htdocs\webMedical\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\xampp\htdocs\webMedical\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
