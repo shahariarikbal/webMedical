@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('home');
 });
@@ -33,9 +34,16 @@ Route::group(['prefix' => 'clients'], function () {
     Route::post('/password-update', 'ClientController@clientsResetPasswordUpdate')->name('clients.password.update');
 });
 
-Route::group(['prefix' => 'clients'], function (){
-    Route::get('/{anypath}', 'DashboardController@index')->where('path', '.*');
-    Route::get('/dashboard', 'DashboardController@index')->name('clients.dashboard');
 
-    Route::post('/add-new-doctor', 'DoctorController@store')->name('clients.add.new.doctor');
+Route::group(['prefix' => 'clients/'], function (){
+
+//    Route::get('/dashboard', 'DashboardController@index')->name('clients.dashboard');
+
+    Route::post('add-new-doctor', 'DoctorController@store')->name('clients.add.new.doctor');
+    Route::get('all/doctors', 'DoctorController@doctors')->name('clients.doctors.list');
+    Route::get('doctor/details/{id}', 'DoctorController@details')->name('clients.doctor.details');
+    Route::get('{path}', 'DashboardController@index')->where( 'path', '.*' );
 });
+
+
+

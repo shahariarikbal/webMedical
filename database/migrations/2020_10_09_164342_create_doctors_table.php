@@ -22,6 +22,9 @@ class CreateDoctorsTable extends Migration
             $table->string('visiting_day');
             $table->string('visiting_time');
             $table->float('visiting_fee', 8,2);
+            $table->string('avatar');
+            $table->string('specialist');
+            $table->string('doctor_degree');
             $table->timestamps();
         });
     }

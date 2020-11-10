@@ -27,7 +27,7 @@
                         <router-link to="/clients/add-new-doctor" class=""><i class="lnr lnr-code"></i> <span>Add Doctor</span></router-link>
                     </li>
                     <li>
-                        <router-link to="/clients/manage-doctor" class=""><i class="lnr lnr-code"></i> <span>Manage Doctor</span></router-link>
+                        <router-link to="/clients/doctors/list" class=""><i class="lnr lnr-code"></i> <span>Manage Doctor</span></router-link>
                     </li>
                 </ul>
             </div>
