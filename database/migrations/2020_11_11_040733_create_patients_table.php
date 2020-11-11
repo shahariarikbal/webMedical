@@ -16,7 +16,7 @@ class CreatePatientsTable extends Migration
         Schema::create('patients', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('phone')->comment('Own or Father NID');;
+            $table->string('phone')->comment('Own or Father Phone');
             $table->string('email')->nullable();
             $table->string('father_name')->comment('Father or Husband Name');
             $table->string('nid')->comment('Own or Father NID');
