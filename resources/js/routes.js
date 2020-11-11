@@ -23,6 +23,10 @@ export const routes = [
         component:DoctorDetails,
     },
     {
+        path:'/clients/doctor/edit/info/:id',
+        component:AddNewDoctor,
+    },
+    {
         path: '/patient/create',
         component: AddNewPatient,
     },

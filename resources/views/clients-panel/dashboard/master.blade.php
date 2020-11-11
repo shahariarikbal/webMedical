@@ -64,6 +64,7 @@
                     <!-- OVERVIEW -->
                     @yield('content')
                 </div>
+                <flash message="{{ session('flash') }}"></flash>
             </div>
             <!-- END MAIN CONTENT -->
         </div>

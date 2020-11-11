@@ -26,6 +26,7 @@
     "dependencies": {
         "sweetalert2": "^10.9.0",
         "vue-loading-overlay": "^3.4.2",
-        "vue-router": "^3.4.5"
+        "vue-router": "^3.4.5",
+        "vuejs-paginate": "^2.1.0"
     }
 }
