@@ -143,7 +143,7 @@ export default {
                         let output = document.getElementById('pre-logo');
                         output.src = reader.result;
                         output.style.display = "block";
-                        output.style.width = "25%";
+                        output.style.width = "15%";
                     }
                     reader.readAsDataURL(event.target.files[0]);
                 }else{

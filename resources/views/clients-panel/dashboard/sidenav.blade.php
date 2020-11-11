@@ -8,13 +8,13 @@
             <div id="patientPages" class="collapse ">
                 <ul class="nav">
                     <li>
-                        <router-link to="/clients/add-new-doctor" class=""><i class="lnr lnr-code"></i> <span>Add Patient</span></router-link>
+                        <router-link to="/patient/create" class=""><i class="lnr lnr-code"></i> <span>Registration</span></router-link>
                     </li>
                     <li>
-                        <router-link to="/clients/add-new-doctor" class=""><i class="lnr lnr-code"></i> <span>Manage Patient</span></router-link>
+                        <router-link to="/patient/list" class=""><i class="lnr lnr-code"></i> <span>Manage Patient</span></router-link>
                     </li>
                     <li>
-                        <router-link to="/clients/add-new-doctor" class=""><i class="lnr lnr-code"></i> <span>Daily Patients</span></router-link>
+                        <router-link to="/patient/daily/list" class=""><i class="lnr lnr-code"></i> <span>Daily Patients</span></router-link>
                     </li>
                 </ul>
             </div>

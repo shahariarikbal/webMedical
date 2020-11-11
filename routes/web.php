@@ -45,5 +45,11 @@ Route::group(['prefix' => 'clients/'], function (){
     Route::get('{path}', 'DashboardController@index')->where( 'path', '.*' );
 });
 
+Route::group(['prefix' => 'patient/'], function () {
+    Route::post('store', 'PatientController@store')->name('patient.store');
+    Route::post('list', 'PatientController@allPatient')->name('patient.list');
+    Route::get('{path}', 'DashboardController@index')->where( 'path', '.*' );
+});
+
 
 
