@@ -8,7 +8,7 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-4">
-                        <span class="new-doctor">{{ titleMode ? 'Update Doctor' : 'Add New Doctor' }}</span>
+                        <span class="new-doctor">{{ titleMode ? 'Update Doctor Information' : 'Add New Doctor' }}</span>
                     </div>
                     <div class="col-md-4"></div>
                     <div class="col-md-4">
@@ -18,6 +18,7 @@
                 <hr/>
                 <div class="col-md-12">
                     <form method="POST" @submit.prevent="editMode ? update() : store()">
+                        <input type="hidden" id="id" name="id" v-model="id">
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -69,6 +70,7 @@
                                 <input id="avatar" type="file" class="form-control" name="avatar" @change="doctorAvatar" accept="image/*"><br/>
                                 <small class="text-danger">{{ avatarError }}</small>
                                 <img src=" " id="pre-logo"/>
+                                <img :src="'/avatar/' + avatar" id="editImg" v-if="seen" style="height: 20%; width: 20%; border-radius: 5px;">
                             </div>
                         </div>
 
@@ -117,6 +119,7 @@ export default {
             editMode: false,
             buttonMode: false,
             titleMode: false,
+            seen : false,
 
             // Store
             id: '',
@@ -146,12 +149,39 @@ export default {
         }
     },
 
+    created() {
+      this.editDoctor()
+    },
+
     components: {
         Loading
     },
 
     methods : {
+        editDoctor () {
+            axios.get(`/clients/doctor/edit/${this.$route.params.id}`)
+                .then(response => {
+                    this.editMode = true,
+                    this.titleMode = true,
+                    this.buttonMode = true,
+                    this.seen = true,
+                    this.id = response.data.id,
+                    this.name = response.data.name,
+                    this.email = response.data.email,
+                    this.phone = response.data.phone,
+                    this.nid_no = response.data.nid_no,
+                    this.visiting_day = response.data.visiting_day,
+                    this.visiting_time = response.data.visiting_time,
+                    this.visiting_fee = response.data.visiting_fee,
+                    this.specialist = response.data.specialist,
+                    this.doctor_degree = response.data.doctor_degree,
+                    this.avatar = response.data.avatar
+                }).catch(error => {
+                console.log(error)
+            })
+        },
         doctorAvatar (e) {
+            $('#editImg').hide()
             if (e.target.files[0]) {
                 let image = e.target.files[0];
                 if(image['type'] === 'image/jpeg' || image['type'] === 'image/png' || image['type'] === 'image/webp' || image['type'] === 'image/gif'){
@@ -192,11 +222,7 @@ export default {
                 console.log(response)
                 if (response.status === 201) {
                     this.isLoading = false
-                    toast.fire({
-                        icon: 'success',
-                        title: 'New Doctor add successfully'
-                    })
-
+                    flash('Add New Doctor successfully')
                     this.name = '';
                     this.email = '';
                     this.phone = '';
@@ -231,7 +257,47 @@ export default {
             console.log('User cancelled the loader.')
         },
         update() {
+            this.isLoading = true
+            const config = {
+                headers: { 'content-type': 'multipart/form-data' }
+            };
+            let doctorData = new FormData();
+            let avatar = document.getElementById("avatar").files[0];
+            doctorData.append('avatar', avatar);
+            doctorData.append('name', this.name);
+            doctorData.append('email', this.email);
+            doctorData.append('phone', this.phone);
+            doctorData.append('nid_no', this.nid_no);
+            doctorData.append('visiting_day', this.visiting_day);
+            doctorData.append('visiting_time', this.visiting_time);
+            doctorData.append('visiting_fee', this.visiting_fee);
+            doctorData.append('specialist', this.specialist);
+            doctorData.append('doctor_degree', this.doctor_degree);
 
+            axios.post('/clients/doctor/update/' + this.id, doctorData, config)
+                .then(response => {
+                    console.log(response)
+                    if (response.status === 200) {
+                        this.isLoading = false
+                        flash('Doctor Information Updated')
+                    }
+                }).catch(error => {
+                console.log(error)
+                if (error.response.status === 422) {
+                    this.isLoading = false
+                    this.nameError = error.response.data.errors.name
+                    this.emailError = error.response.data.errors.email
+                    this.phoneError = error.response.data.errors.phone
+                    this.nidError = error.response.data.errors.nid_no
+                    this.visiting_dayError = error.response.data.errors.visiting_day
+                    this.visiting_timeError = error.response.data.errors.visiting_time
+                    this.visiting_feeError = error.response.data.errors.visiting_fee
+                    this.visiting_feeError = error.response.data.errors.visiting_fee
+                    this.specialistError = error.response.data.errors.specialist
+                    this.avatarError = error.response.data.errors.avatar
+                    this.doctor_degreeError = error.response.data.errors.doctor_degree
+                }
+            })
         }
     }
 }

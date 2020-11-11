@@ -103,9 +103,7 @@ export default {
             this.visiting_fee = response.data.visiting_fee,
             this.specialist = response.data.specialist,
             this.doctor_degree = response.data.doctor_degree,
-            this.avatar = response.data.avatar,
-            this.editMode = true
-            this.buttonMode = true
+            this.avatar = response.data.avatar
 
         })
     }
@@ -119,6 +117,10 @@ export default {
     }
     .fonts-line-height {
         line-height: 24px;
+    }
+
+    .manage-font {
+        font-size: 15px;
     }
 
     #doctors {

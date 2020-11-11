@@ -42,12 +42,16 @@ Route::group(['prefix' => 'clients/'], function (){
     Route::post('add-new-doctor', 'DoctorController@store')->name('clients.add.new.doctor');
     Route::get('all/doctors', 'DoctorController@doctors')->name('clients.doctors.list');
     Route::get('doctor/details/{id}', 'DoctorController@details')->name('clients.doctor.details');
+    Route::get('doctor/edit/{doctor}', 'DoctorController@edit')->name('clients.doctor.edit');
+    Route::post('doctor/update/{id}', 'DoctorController@update')->name('clients.doctor.update');
+    Route::delete('delete/doctor/{doctor}', 'DoctorController@distroy')->name('clients.doctor.distroy');
     Route::get('{path}', 'DashboardController@index')->where( 'path', '.*' );
 });
 
 Route::group(['prefix' => 'patient/'], function () {
     Route::post('store', 'PatientController@store')->name('patient.store');
-    Route::post('list', 'PatientController@allPatient')->name('patient.list');
+    Route::get('edit/{patient}', 'PatientController@edit')->name('patient.edit');
+    Route::post('update/{patient}', 'PatientController@update')->name('patient.edit');
     Route::get('{path}', 'DashboardController@index')->where( 'path', '.*' );
 });
 

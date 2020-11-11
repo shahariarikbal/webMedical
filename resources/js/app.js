@@ -12,29 +12,21 @@ Vue.use(VueRouter)
 import {routes} from './routes'
 
 // global component
+Vue.component('flash', require('./components/Flash.vue').default);
 Vue.component('client-registration', require('./clients/Registration.vue').default);
 Vue.component('admin-main', require('./components/admin/Master.vue').default);
+
+import Paginate from 'vuejs-paginate'
+Vue.component('paginate', Paginate)
 
 const router = new VueRouter({
     routes, // short for `routes: routes`
     mode: 'history',
 })
 
-// Sweet alert
-import swal from 'sweetalert2'
-window.swal = swal;
-const toast = swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-        toast.addEventListener('mouseenter', swal.stopTimer)
-        toast.addEventListener('mouseleave', swal.resumeTimer)
-    }
-})
-window.toast = toast
+
+
+window.EventBus = new Vue();
 
 const app = new Vue({
     router
