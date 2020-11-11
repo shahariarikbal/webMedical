@@ -5,48 +5,47 @@
                 <div class="panel-body" style="margin-bottom: 50px;">
                     <router-link to="/clients/doctors/list" class=""> <span class="btn btn-sm btn-primary pull-right manage-font">Manage Doctor</span></router-link>
                     <div class="row">
-                        <div class="col-md-6" style="margin-top: 50px;">
-                            <img :src="'/avatar/' + avatar" style="height: 68%; width: 68%; border-radius: 8px;">
+                        
+                        <div class="card">
+                            <h2 style="padding-top:20px;">Doctor profile</h2>
+                        <img :src="'/avatar/' + avatar" style="height: 68%; width: 70%; border-radius: 8px;margin-top:10px;">
+                        <h1>{{ name }}</h1>
+                        <p class="title"> <strong style="text-transform: uppercase">( {{ doctor_degree }}</strong> - {{ specialist }} Specialist <strong>)</strong></p>
+                        <center>
+                            <table style="margin-top:10px;margin-bottom:10px;">
+                            <tr>
+                                <th>Phone :</th>
+                                <td>{{ phone }}</td>
+                            </tr>
+                            <tr>
+                                <th>Email :</th>
+                                <td>{{ email }}</td>
+                            </tr>
+                            <tr>
+                                <th>Visiting Fee :</th>
+                                <td>{{ visiting_fee }}</td>
+                            </tr>
+                            <tr>
+                                <th>Visiting Day :</th>
+                                <td>{{ visiting_day }}</td>
+                            </tr>
+                            <tr>
+                                <th>Visiting Time :</th>
+                                <td>{{ visiting_time }}</td>
+                            </tr>
+                            <tr>
+                                <th>NID No :</th>
+                                <td>{{ nid_no }}</td>
+                            </tr>
+                        </table>
+                        </center>
+                        <router-link to="/clients/doctors/list" style="color:white;"><button>Go back</button></router-link>
                         </div>
-                        <div class="col-md-6 fonts-line-height" style="margin-top: 20px;">
-                            <table id="doctors">
-                                <tr>
-                                    <th>Name</th>
-                                    <td>{{ name }} <strong style="text-transform: uppercase">( {{ doctor_degree }} )</strong></td>
-                                </tr>
-                                <tr>
-                                    <th>Email</th>
-                                    <td>{{ email }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Phone</th>
-                                    <td>{{ phone }}</td>
-                                </tr>
-                                <tr>
-                                    <th>NID</th>
-                                    <td>{{ nid_no }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Visiting Day</th>
-                                    <td>{{ visiting_day }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Visiting Time</th>
-                                    <td>{{ visiting_time }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Visiting Fee</th>
-                                    <td>{{ visiting_fee }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Specialist</th>
-                                    <td>{{ specialist }}</td>
-                                </tr>
-                            </table>
-                        </div>
+
                     </div>
                 </div>
             </div>
+            
         </div>
     </div>
 </template>
@@ -142,5 +141,41 @@ export default {
         text-align: left;
         /*background-color: #4CAF50;*/
         color: black;
+    }
+    /* changes */
+    .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+    font-family: arial;
+    }
+
+    .title {
+    color: grey;
+    font-size: 18px;
+    }
+
+    button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+    }
+
+    a {
+    text-decoration: none;
+    font-size: 22px;
+    color: black;
+    }
+
+    button:hover, a:hover {
+    opacity: 0.7;
     }
 </style>

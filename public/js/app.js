@@ -2476,7 +2476,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -7239,7 +7238,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.fonts[data-v-300a35c8] {\n    font-size: 20px;\n    color: #000000;\n}\n.fonts-line-height[data-v-300a35c8] {\n    line-height: 24px;\n}\n#doctors[data-v-300a35c8] {\n    font-family: Arial, Helvetica, sans-serif;\n    border-collapse: collapse;\n    width: 100%;\n}\n#doctors td[data-v-300a35c8], #doctors th[data-v-300a35c8] {\n    border: 1px solid #ddd;\n    padding: 8px;\n}\n#doctors tr[data-v-300a35c8]:nth-child(even){background-color: #f2f2f2;}\n#doctors tr[data-v-300a35c8]:hover {background-color: #ddd;}\n#doctors th[data-v-300a35c8] {\n    padding-top: 12px;\n    padding-bottom: 12px;\n    text-align: left;\n    /*background-color: #4CAF50;*/\n    color: black;\n}\n", ""]);
+exports.push([module.i, "\n.fonts[data-v-300a35c8] {\n    font-size: 20px;\n    color: #000000;\n}\n.fonts-line-height[data-v-300a35c8] {\n    line-height: 24px;\n}\n#doctors[data-v-300a35c8] {\n    font-family: Arial, Helvetica, sans-serif;\n    border-collapse: collapse;\n    width: 100%;\n}\n#doctors td[data-v-300a35c8], #doctors th[data-v-300a35c8] {\n    border: 1px solid #ddd;\n    padding: 8px;\n}\n#doctors tr[data-v-300a35c8]:nth-child(even){background-color: #f2f2f2;}\n#doctors tr[data-v-300a35c8]:hover {background-color: #ddd;}\n#doctors th[data-v-300a35c8] {\n    padding-top: 12px;\n    padding-bottom: 12px;\n    text-align: left;\n    /*background-color: #4CAF50;*/\n    color: black;\n}\n/* changes */\n.card[data-v-300a35c8] {\nbox-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\nmax-width: 600px;\nmargin: auto;\ntext-align: center;\nfont-family: arial;\n}\n.title[data-v-300a35c8] {\ncolor: grey;\nfont-size: 18px;\n}\nbutton[data-v-300a35c8] {\nborder: none;\noutline: 0;\ndisplay: inline-block;\npadding: 8px;\ncolor: white;\nbackground-color: #000;\ntext-align: center;\ncursor: pointer;\nwidth: 100%;\nfont-size: 18px;\n}\na[data-v-300a35c8] {\ntext-decoration: none;\nfont-size: 22px;\ncolor: black;\n}\nbutton[data-v-300a35c8]:hover, a[data-v-300a35c8]:hover {\nopacity: 0.7;\n}\n", ""]);
 
 // exports
 
@@ -43253,86 +43252,93 @@ var render = function() {
             _c("div", { staticClass: "row" }, [
               _c(
                 "div",
-                {
-                  staticClass: "col-md-6",
-                  staticStyle: { "margin-top": "50px" }
-                },
+                { staticClass: "card" },
                 [
+                  _c("h2", { staticStyle: { "padding-top": "20px" } }, [
+                    _vm._v("Doctor profile")
+                  ]),
+                  _vm._v(" "),
                   _c("img", {
                     staticStyle: {
                       height: "68%",
-                      width: "68%",
-                      "border-radius": "8px"
+                      width: "70%",
+                      "border-radius": "8px",
+                      "margin-top": "10px"
                     },
                     attrs: { src: "/avatar/" + _vm.avatar }
-                  })
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "col-md-6 fonts-line-height",
-                  staticStyle: { "margin-top": "20px" }
-                },
-                [
-                  _c("table", { attrs: { id: "doctors" } }, [
-                    _c("tr", [
-                      _c("th", [_vm._v("Name")]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(_vm._s(_vm.name) + " "),
-                        _c(
-                          "strong",
-                          { staticStyle: { "text-transform": "uppercase" } },
-                          [_vm._v("( " + _vm._s(_vm.doctor_degree) + " )")]
-                        )
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _c("th", [_vm._v("Email")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(_vm.email))])
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _c("th", [_vm._v("Phone")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(_vm.phone))])
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _c("th", [_vm._v("NID")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(_vm.nid_no))])
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _c("th", [_vm._v("Visiting Day")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(_vm.visiting_day))])
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _c("th", [_vm._v("Visiting Time")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(_vm.visiting_time))])
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _c("th", [_vm._v("Visiting Fee")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(_vm.visiting_fee))])
-                    ]),
-                    _vm._v(" "),
-                    _c("tr", [
-                      _c("th", [_vm._v("Specialist")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(_vm.specialist))])
-                    ])
-                  ])
-                ]
+                  }),
+                  _vm._v(" "),
+                  _c("h1", [_vm._v(_vm._s(_vm.name))]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "title" }, [
+                    _c(
+                      "strong",
+                      { staticStyle: { "text-transform": "uppercase" } },
+                      [_vm._v("( " + _vm._s(_vm.doctor_degree))]
+                    ),
+                    _vm._v(" - " + _vm._s(_vm.specialist) + " Specialist "),
+                    _c("strong", [_vm._v(")")])
+                  ]),
+                  _vm._v(" "),
+                  _c("center", [
+                    _c(
+                      "table",
+                      {
+                        staticStyle: {
+                          "margin-top": "10px",
+                          "margin-bottom": "10px"
+                        }
+                      },
+                      [
+                        _c("tr", [
+                          _c("th", [_vm._v("Phone :")]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(_vm.phone))])
+                        ]),
+                        _vm._v(" "),
+                        _c("tr", [
+                          _c("th", [_vm._v("Email :")]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(_vm.email))])
+                        ]),
+                        _vm._v(" "),
+                        _c("tr", [
+                          _c("th", [_vm._v("Visiting Fee :")]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(_vm.visiting_fee))])
+                        ]),
+                        _vm._v(" "),
+                        _c("tr", [
+                          _c("th", [_vm._v("Visiting Day :")]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(_vm.visiting_day))])
+                        ]),
+                        _vm._v(" "),
+                        _c("tr", [
+                          _c("th", [_vm._v("Visiting Time :")]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(_vm.visiting_time))])
+                        ]),
+                        _vm._v(" "),
+                        _c("tr", [
+                          _c("th", [_vm._v("NID No :")]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(_vm.nid_no))])
+                        ])
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticStyle: { color: "white" },
+                      attrs: { to: "/clients/doctors/list" }
+                    },
+                    [_c("button", [_vm._v("Go back")])]
+                  )
+                ],
+                1
               )
             ])
           ],
