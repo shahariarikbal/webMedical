@@ -161,21 +161,21 @@ export default {
         editDoctor () {
             axios.get(`/clients/doctor/edit/${this.$route.params.id}`)
                 .then(response => {
-                    this.editMode = true,
-                    this.titleMode = true,
-                    this.buttonMode = true,
-                    this.seen = true,
-                    this.id = response.data.id,
-                    this.name = response.data.name,
-                    this.email = response.data.email,
-                    this.phone = response.data.phone,
-                    this.nid_no = response.data.nid_no,
-                    this.visiting_day = response.data.visiting_day,
+                    this.editMode      = true,
+                    this.titleMode     = true,
+                    this.buttonMode    = true,
+                    this.seen          = true,
+                    this.id            = response.data.id,
+                    this.name          = response.data.name,
+                    this.email         = response.data.email,
+                    this.phone         = response.data.phone,
+                    this.nid_no        = response.data.nid_no,
+                    this.visiting_day  = response.data.visiting_day,
                     this.visiting_time = response.data.visiting_time,
-                    this.visiting_fee = response.data.visiting_fee,
-                    this.specialist = response.data.specialist,
+                    this.visiting_fee  = response.data.visiting_fee,
+                    this.specialist    = response.data.specialist,
                     this.doctor_degree = response.data.doctor_degree,
-                    this.avatar = response.data.avatar
+                    this.avatar        = response.data.avatar
                 }).catch(error => {
                 console.log(error)
             })

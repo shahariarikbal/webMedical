@@ -38,7 +38,6 @@ Route::group(['prefix' => 'clients'], function () {
 Route::group(['prefix' => 'clients/'], function (){
 
 //    Route::get('/dashboard', 'DashboardController@index')->name('clients.dashboard');
-
     Route::post('add-new-doctor', 'DoctorController@store')->name('clients.add.new.doctor');
     Route::get('all/doctors', 'DoctorController@doctors')->name('clients.doctors.list');
     Route::get('doctor/details/{id}', 'DoctorController@details')->name('clients.doctor.details');
@@ -50,8 +49,11 @@ Route::group(['prefix' => 'clients/'], function (){
 
 Route::group(['prefix' => 'patient/'], function () {
     Route::post('store', 'PatientController@store')->name('patient.store');
-    Route::get('edit/{patient}', 'PatientController@edit')->name('patient.edit');
-    Route::post('update/{patient}', 'PatientController@update')->name('patient.edit');
+    Route::get('all/patients', 'PatientController@patients')->name('patient.list');
+    Route::get('delete/patient/{id}','PatientController@destroy')->name('patient.edit');
+    Route::get('edit/{id}', 'PatientController@edit')->name('patient.edit');
+    Route::post('update', 'PatientController@update')->name('patient.update');
+    Route::get('details/{id}','PatientController@details')->name('patient.details');
     Route::get('{path}', 'DashboardController@index')->where( 'path', '.*' );
 });
 

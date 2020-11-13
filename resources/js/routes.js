@@ -3,6 +3,7 @@ import ManageDoctor from './components/admin/DoctorList.vue'
 import AddNewDoctor from './components/admin/AddDoctor.vue'
 import DoctorDetails from './components/admin/DoctorDetails.vue'
 import AddNewPatient from './components/admin/patient/Add.vue'
+import PatientDetails from './components/admin/patient/Details.vue'
 import ManagePatient from './components/admin/patient/List.vue'
 import DailyManagePatient from './components/admin/patient/Daily.vue'
 export const routes = [
@@ -33,6 +34,14 @@ export const routes = [
     {
         path: '/patient/list',
         component: ManagePatient,
+    },
+    {
+        path: '/patient/edit/info/:id',
+        component:AddNewPatient,
+    },
+    {
+        path: '/patient/details/info/:id',
+        component:PatientDetails,
     },
     {
         path: '/patient/daily/list',

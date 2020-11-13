@@ -88,7 +88,7 @@ export default {
         return {
             doctors: [],
             doctorsPages: [],
-            perPage: 10,
+            perPage: 1,
             pageCount: 1,
             currentPage: 1,
             search: '',
