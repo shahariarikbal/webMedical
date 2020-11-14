@@ -32,14 +32,10 @@ class PatientController extends Controller
             $patient->address     = $request->address;
             $patient->cabin       = $request->cabin;
             $patient->bed         = $request->bed;
-            $patient->disease      = $request->diseas;
-            if($request->sex === 'Male'){
-                $patient->sex         = 0;
-            }else{
-                $patient->sex         = 1;
-            };
+            $patient->disease     = $request->diseas;
+            $patient->sex     = $request->sex;
             $patient->save();
-            return response()->json($patient,200);
+            return response()->json($patient,201);
 
         }catch (ModelNotFoundException $exception) {
             return response()->json([

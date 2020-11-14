@@ -36,7 +36,7 @@
                                             {{patient.phone}}
                                         </td>
                                         <td>{{ patient.email }}</td>
-                                        <td v-if="patient.sex===1">Male</td>
+                                        <td v-if="patient.sex===0">Male</td>
                                         <td v-else>Female</td>
                                         <td>
                                             <router-link :to="`/patient/details/info/${patient.id}`" class="btn btn-sm btn-primary">
@@ -89,7 +89,7 @@ export default {
         return {
             patients: [],
             patientsPages: [],
-            perPage: 2,
+            perPage: 10,
             pageCount: 1,
             currentPage: 1,
             search: '',

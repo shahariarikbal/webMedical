@@ -1,10 +1,10 @@
 <template>
     <div class="container-fluid">
         <div class="panel vld-parent">
-            <!-- <loading :active.sync="isLoading"
+            <loading :active.sync="isLoading"
                      :can-cancel="true"
                      :on-cancel="onCancel"
-                     :is-full-page="fullPage"></loading> -->
+                     :is-full-page="fullPage"></loading>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-4">
@@ -94,8 +94,8 @@
                                     <label for="sex">Patient Sex</label>
                                     <select v-model="sex" name="sex" class="form-control">
                                         <option disabled value="">Please select your sex</option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
+                                        <option value="0">Male</option>
+                                        <option value="1">Female</option>
                                         </select>
                                         <span>Selected: {{ sex }}</span>
                                     <span class="text-danger">{{sexError}}</span>
@@ -111,11 +111,17 @@
 </template>
 
 <script>
+// Import component
+import Loading from 'vue-loading-overlay';
+// Import stylesheet
+import 'vue-loading-overlay/dist/vue-loading.css';
 export default {
 name: "Add",
    data(){
        return{
            // Mode Condition
+           isLoading: false,
+           fullPage: true,
            titleMode   : false,
            editMode    : false,
            buttonMode  : false,
@@ -151,7 +157,13 @@ name: "Add",
    created(){
        this.edit()
    },
+    components: {
+        Loading
+    },
    methods:{
+       onCancel() {
+           console.log('User cancelled the loader.')
+       },
        edit(){
            axios.get(`/patient/edit/${this.$route.params.id}`)
            .then(response =>{
@@ -167,7 +179,7 @@ name: "Add",
                this.nid         = response.data.nid
                this.address     = response.data.address
                this.cabin       = response.data.cabin
-               this.bed = response.data.cabin
+               this.bed = response.data.bed
                this.diseas = response.data.disease
                if(response.data.sex === 1){
                    this.sex = 'Male'
@@ -181,6 +193,7 @@ name: "Add",
            })
        },
        store(){
+           this.isLoading = true
            axios.post('store',{
                 name        : this.name,
                 phone       : this.phone,
@@ -194,23 +207,28 @@ name: "Add",
                 sex         : this.sex,
            })
            .then(response =>{
-                this.name        = ''
-                this.phone       = ''
-                this.email       = ''
-                this.father_name = ''
-                this.nid         = ''
-                this.address     = ''
-                this.cabin       = ''
-                this.bed         = ''
-                this.diseas      = ''
-                this.sex         = ''
-                this.sexError    = ''
-               flash('New patient updated successfully')
-               console.log(response.data);
+               if (response.status === 201) {
+                   this.isLoading = false
+                   this.$router.push('/patient/list')
+                   flash('New patient insert successfully')
+                   this.name        = ''
+                   this.phone       = ''
+                   this.email       = ''
+                   this.father_name = ''
+                   this.nid         = ''
+                   this.address     = ''
+                   this.cabin       = ''
+                   this.bed         = ''
+                   this.diseas      = ''
+                   this.sex         = ''
+                   this.sexError    = ''
+               }
+               //console.log(response.data);
            })
            .catch(error =>{
             //    console.log(error);
                if(error.response.status === 422){
+                   this.isLoading = false
                     if(error.response.data.errors.name === undefined){
                         this.nameError = ''
                     }else{
@@ -265,6 +283,7 @@ name: "Add",
            })
        },
        update(){
+           this.isLoading = true
            axios.post('/patient/update',{
                 titleMode   : false,
                 editMode    : false,
@@ -283,8 +302,12 @@ name: "Add",
                 id          : this.patientId,
            })
            .then(response =>{
-               console.log(response.data);
-               flash('Patient informations updated successfully')
+               if (response.status === 200) {
+                   this.isLoading = false
+                   flash('Patient information updated successfully')
+                   this.$router.push('/patient/list')
+               }
+               //console.log(response.data);
            })
            .catch(error =>{
                console.log(error);
@@ -295,5 +318,10 @@ name: "Add",
 </script>
 
 <style scoped>
-
+.manage-font {
+    font-size: 15px;
+}
+.new-doctor {
+    font-size: 24px;
+}
 </style>

@@ -15,9 +15,9 @@ class CreateDailyPatientsTable extends Migration
     {
         Schema::create('daily_patients', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('doctor_id')->unsigned();
             $table->string('name');
             $table->string('phone');
-            $table->integer('doctor_id')->unsigned();
             $table->timestamp('sl_date');
             $table->string('remark');
             $table->timestamps();
