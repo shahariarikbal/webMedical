@@ -155,9 +155,10 @@ name: "Add",
        edit(){
            axios.get(`/patient/edit/${this.$route.params.id}`)
            .then(response =>{
-               this.titleMode = true
-               this.editMode = true
-               this.buttonMode = true
+               if(response.data.name != undefined){
+                   this.editMode      = true
+                   this.titleMode     = true
+                   this.buttonMode    = true
                this.patientId = response.data.id
                this.name = response.data.name
                this.phone = response.data.phone
@@ -173,6 +174,7 @@ name: "Add",
                }else{
                    this.sex = 'Female'
                }
+            }
            })
            .catch(error =>{
                console.log(error)
@@ -263,7 +265,11 @@ name: "Add",
            })
        },
        update(){
-           axios.post('../../update',{
+           axios.post('/patient/update',{
+                titleMode   : false,
+                editMode    : false,
+                buttonMode  : false,
+                
                 name        : this.name,
                 phone       : this.phone,
                 email       : this.email,

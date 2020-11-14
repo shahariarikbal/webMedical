@@ -3055,24 +3055,26 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get("/patient/edit/".concat(this.$route.params.id)).then(function (response) {
-        _this.titleMode = true;
-        _this.editMode = true;
-        _this.buttonMode = true;
-        _this.patientId = response.data.id;
-        _this.name = response.data.name;
-        _this.phone = response.data.phone;
-        _this.email = response.data.email;
-        _this.father_name = response.data.father_name;
-        _this.nid = response.data.nid;
-        _this.address = response.data.address;
-        _this.cabin = response.data.cabin;
-        _this.bed = response.data.cabin;
-        _this.diseas = response.data.disease;
+        if (response.data.name != undefined) {
+          _this.editMode = true;
+          _this.titleMode = true;
+          _this.buttonMode = true;
+          _this.patientId = response.data.id;
+          _this.name = response.data.name;
+          _this.phone = response.data.phone;
+          _this.email = response.data.email;
+          _this.father_name = response.data.father_name;
+          _this.nid = response.data.nid;
+          _this.address = response.data.address;
+          _this.cabin = response.data.cabin;
+          _this.bed = response.data.cabin;
+          _this.diseas = response.data.disease;
 
-        if (response.data.sex === 1) {
-          _this.sex = 'Male';
-        } else {
-          _this.sex = 'Female';
+          if (response.data.sex === 1) {
+            _this.sex = 'Male';
+          } else {
+            _this.sex = 'Female';
+          }
         }
       })["catch"](function (error) {
         console.log(error);
@@ -3172,7 +3174,10 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     update: function update() {
-      axios.post('../../update', {
+      axios.post('/patient/update', {
+        titleMode: false,
+        editMode: false,
+        buttonMode: false,
         name: this.name,
         phone: this.phone,
         email: this.email,
@@ -3224,10 +3229,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
 //
 //
 //
@@ -41880,13 +41881,13 @@ var render = function() {
             staticStyle: { "margin-bottom": "50px" }
           },
           [
-            _c("router-link", { attrs: { to: "/clients/doctors/list" } }, [
+            _c("router-link", { attrs: { to: "/patient/list" } }, [
               _c(
                 "span",
                 {
                   staticClass: "btn btn-sm btn-primary pull-right manage-font"
                 },
-                [_vm._v("Manage Doctor")]
+                [_vm._v("Manage Patient")]
               )
             ]),
             _vm._v(" "),
@@ -41896,7 +41897,7 @@ var render = function() {
                 { staticClass: "card" },
                 [
                   _c("h2", { staticStyle: { "padding-top": "20px" } }, [
-                    _vm._v("Patient profile")
+                    _vm._v(_vm._s(_vm.name))
                   ]),
                   _vm._v(" "),
                   _c(
@@ -41904,12 +41905,6 @@ var render = function() {
                     { staticClass: "table table-hover table-bordered" },
                     [
                       _c("tbody", [
-                        _c("tr", [
-                          _c("th", [_vm._v("Name")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(_vm.name))])
-                        ]),
-                        _vm._v(" "),
                         _c("tr", [
                           _c("th", [_vm._v("Phone")]),
                           _vm._v(" "),

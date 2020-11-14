@@ -3,17 +3,13 @@
         <div class="col-md-12">
             <div class="panel">
                 <div class="panel-body" style="margin-bottom: 50px;">
-                    <router-link to="/clients/doctors/list" class=""> <span class="btn btn-sm btn-primary pull-right manage-font">Manage Doctor</span></router-link>
+                    <router-link to="/patient/list" class=""> <span class="btn btn-sm btn-primary pull-right manage-font">Manage Patient</span></router-link>
                     <div class="row">
                         
                         <div class="card">
-                            <h2 style="padding-top:20px;">Patient profile</h2>
+                            <h2 style="padding-top:20px;">{{name}}</h2>
                         <table class="table table-hover table-bordered">
                         <tbody>
-                            <tr>
-                                <th>Name</th>
-                                <td>{{name}}</td>
-                            </tr>
                             <tr>
                                 <th>Phone</th>
                                 <td>{{phone}}</td>
