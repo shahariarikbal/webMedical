@@ -1,10 +1,10 @@
 <template>
     <div class="container-fluid">
         <div class="panel vld-parent">
-            <!-- <loading :active.sync="isLoading"
+            <loading :active.sync="isLoading"
                      :can-cancel="true"
                      :on-cancel="onCancel"
-                     :is-full-page="fullPage"></loading> -->
+                     :is-full-page="fullPage"></loading>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-4">
@@ -18,7 +18,7 @@
                 <hr/>
                 <div class="col-md-12">
                     <form method="POST" @submit.prevent="editMode ? update() : store()">
-                        <!-- <input type="hidden" id="id" name="id" v-model="id"> -->
+                         <input type="text" id="id" name="id" v-model="id">
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -92,10 +92,10 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="sex">Patient Sex</label>
-                                    <select v-model="sex" name="sex" class="form-control">
+                                    <select v-model="sex" name="sex" id="sex" class="form-control">
                                         <option disabled value="">Please select your sex</option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
                                         </select>
                                         <span>Selected: {{ sex }}</span>
                                     <span class="text-danger">{{sexError}}</span>
@@ -111,16 +111,23 @@
 </template>
 
 <script>
+// Import component
+import Loading from 'vue-loading-overlay';
+// Import stylesheet
+import 'vue-loading-overlay/dist/vue-loading.css';
+
 export default {
-name: "Add",
    data(){
        return{
            // Mode Condition
+           isLoading: false,
+           fullPage: true,
            titleMode   : false,
            editMode    : false,
            buttonMode  : false,
-           
+
            // Store items
+           id: '',
            name        : '',
            phone       : '',
            email       : '',
@@ -132,8 +139,6 @@ name: "Add",
            diseas      : '',
            sex         : '',
 
-           // edit-update fact
-           patientId : null,
 
            // Error messages
            nameError       : '',
@@ -148,17 +153,24 @@ name: "Add",
            sexError        : '',
        }
    },
+    components: {
+        Loading
+    },
    created(){
        this.edit()
    },
    methods:{
+       onCancel() {
+           console.log('User cancelled the loader.')
+       },
        edit(){
            axios.get(`/patient/edit/${this.$route.params.id}`)
            .then(response =>{
                this.titleMode = true
                this.editMode = true
                this.buttonMode = true
-               this.patientId = response.data.id
+
+               this.id = response.data.id
                this.name = response.data.name
                this.phone = response.data.phone
                this.email = response.data.email
@@ -179,6 +191,7 @@ name: "Add",
            })
        },
        store(){
+           this.isLoading = true
            axios.post('store',{
                 name        : this.name,
                 phone       : this.phone,
@@ -192,6 +205,7 @@ name: "Add",
                 sex         : this.sex,
            })
            .then(response =>{
+               this.isLoading = false
                 this.name        = ''
                 this.phone       = ''
                 this.email       = ''
@@ -203,12 +217,13 @@ name: "Add",
                 this.diseas      = ''
                 this.sex         = ''
                 this.sexError    = ''
-               flash('New patient updated successfully')
+               flash('New patient insert successfully')
                console.log(response.data);
            })
            .catch(error =>{
             //    console.log(error);
                if(error.response.status === 422){
+                   this.isLoading = false
                     if(error.response.data.errors.name === undefined){
                         this.nameError = ''
                     }else{
@@ -263,7 +278,9 @@ name: "Add",
            })
        },
        update(){
-           axios.post('../../update',{
+           this.isLoading = true
+           axios.post('update/' + this.id,{
+                id          : this.id,
                 name        : this.name,
                 phone       : this.phone,
                 email       : this.email,
@@ -273,14 +290,15 @@ name: "Add",
                 cabin       : this.cabin,
                 bed         : this.bed,
                 diseas      : this.diseas,
-                sex         : this.sex,
-                id          : this.patientId,
+                sex         : this.sex
            })
            .then(response =>{
+               this.isLoading = false
                console.log(response.data);
-               flash('Patient informations updated successfully')
+               flash('Patient information updated successfully')
            })
            .catch(error =>{
+               this.isLoading = false
                console.log(error);
            })
        }

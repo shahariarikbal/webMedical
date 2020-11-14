@@ -59,7 +59,7 @@ class PatientController extends Controller
     public function edit($id)
     {
         $patient = Patient::find($id);
-        return response()->json($patient,200);
+        return $patient;
     }
     public function update(Request $request)
     {
