@@ -222,6 +222,7 @@ export default {
                 console.log(response)
                 if (response.status === 201) {
                     this.isLoading = false
+                    this.$router.push('/clients/doctors/list')
                     flash('Add New Doctor successfully')
                     this.name = '';
                     this.email = '';
@@ -279,6 +280,7 @@ export default {
                     console.log(response)
                     if (response.status === 200) {
                         this.isLoading = false
+                        this.$router.push('/clients/doctors/list')
                         flash('Doctor Information Updated')
                     }
                 }).catch(error => {

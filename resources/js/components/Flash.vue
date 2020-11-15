@@ -46,6 +46,6 @@ export default {
     bottom: 50px;
 }
 .msg-bg {
-    background-color: #00AAFF;
+    background: rgb(0, 0, 0); /* Fallback color */
 }
 </style>

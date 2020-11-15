@@ -2443,6 +2443,9 @@ __webpack_require__.r(__webpack_exports__);
 
         if (response.status === 201) {
           _this2.isLoading = false;
+
+          _this2.$router.push('/clients/doctors/list');
+
           flash('Add New Doctor successfully');
           _this2.name = '';
           _this2.email = '';
@@ -2504,6 +2507,9 @@ __webpack_require__.r(__webpack_exports__);
 
         if (response.status === 200) {
           _this3.isLoading = false;
+
+          _this3.$router.push('/clients/doctors/list');
+
           flash('Doctor Information Updated');
         }
       })["catch"](function (error) {
@@ -7998,7 +8004,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.flash-message {\n    position: fixed;\n    right: 25px;\n    bottom: 50px;\n}\n.msg-bg {\n    background-color: #00AAFF;\n}\n", ""]);
+exports.push([module.i, "\n.flash-message {\n    position: fixed;\n    right: 25px;\n    bottom: 50px;\n}\n.msg-bg {\n    background: rgb(0, 0, 0); /* Fallback color */\n}\n", ""]);
 
 // exports
 
@@ -40979,7 +40985,7 @@ var render = function() {
                         _c("tr", [
                           _c("th", [_vm._v("Visiting Fee :")]),
                           _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(_vm.visiting_fee))])
+                          _c("td", [_vm._v(_vm._s(_vm.visiting_fee) + " Tk.")])
                         ]),
                         _vm._v(" "),
                         _c("tr", [

@@ -5,7 +5,7 @@
                 <div class="panel-body" style="margin-bottom: 50px;">
                     <router-link to="/clients/doctors/list" class=""> <span class="btn btn-sm btn-primary pull-right manage-font">Manage Doctor</span></router-link>
                     <div class="row">
-                        
+
                         <div class="card">
                             <h2 style="padding-top:20px;">Doctor profile</h2>
                         <img :src="'/avatar/' + avatar" style="height: 68%; width: 70%; border-radius: 8px;margin-top:10px;">
@@ -23,7 +23,7 @@
                             </tr>
                             <tr>
                                 <th>Visiting Fee :</th>
-                                <td>{{ visiting_fee }}</td>
+                                <td>{{ visiting_fee }} Tk.</td>
                             </tr>
                             <tr>
                                 <th>Visiting Day :</th>
@@ -45,7 +45,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </template>
