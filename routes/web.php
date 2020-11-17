@@ -57,5 +57,15 @@ Route::group(['prefix' => 'patient/'], function () {
     Route::get('{path}', 'DashboardController@index')->where( 'path', '.*' );
 });
 
+Route::group(['prefix' => 'employee/'], function () {
+    Route::post('store', 'EmployeeController@store')->name('employee.store');
+    Route::get('list', 'EmployeeController@list')->name('employee.list');
+    Route::get('edit/{id}', 'EmployeeController@edit')->name('employee.edit');
+    Route::get('view/{id}', 'EmployeeController@view')->name('employee.view');
+    Route::post('update/{id}', 'EmployeeController@update')->name('employee.update');
+    Route::get('destroy/{employee}', 'EmployeeController@destroy')->name('employee.destroy');
+    Route::get('{path}', 'DashboardController@index')->where( 'path', '.*' );
+});
+
 
 

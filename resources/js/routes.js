@@ -6,6 +6,9 @@ import AddNewPatient from './components/admin/patient/Add.vue'
 import PatientDetails from './components/admin/patient/Details.vue'
 import ManagePatient from './components/admin/patient/List.vue'
 import DailyManagePatient from './components/admin/patient/Daily.vue'
+import AddNewEmployee from './components/admin/employee/Add.vue'
+import EmployeeList from './components/admin/employee/List.vue'
+import EmployeeDetails from './components/admin/employee/Details.vue'
 export const routes = [
     {
         path:'/clients/dashboard',
@@ -46,5 +49,25 @@ export const routes = [
     {
         path: '/patient/daily/list',
         component: DailyManagePatient,
-    }
+    },
+    {
+        path: '/employee/create',
+        component: AddNewEmployee,
+    },
+    {
+        path: '/employee/manage',
+        component: EmployeeList,
+    },
+    {
+        path: '/employee/trash/list/info',
+        component: EmployeeTrashList,
+    },
+    {
+        path: '/employee/edit/info/:id',
+        component: AddNewEmployee,
+    },
+    {
+        path: '/employee/details/info/:id',
+        component: EmployeeDetails,
+    },
 ]

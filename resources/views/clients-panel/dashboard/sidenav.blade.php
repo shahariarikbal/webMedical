@@ -45,6 +45,19 @@
             </div>
         </li>
         <li>
+            <a href="#employee" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>Employee</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+            <div id="employee" class="collapse ">
+                <ul class="nav">
+                    <li>
+                        <router-link to="/employee/create" class=""><i class="lnr lnr-code"></i> <span>Add Employee</span></router-link>
+                    </li>
+                    <li>
+                        <router-link to="/employee/manage" class=""><i class="lnr lnr-code"></i> <span>Manage Employee</span></router-link>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li>
             <a href="#bloodDonors" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>Blood Donors</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
             <div id="bloodDonors" class="collapse ">
                 <ul class="nav">
@@ -85,19 +98,6 @@
                     </li>
                     <li>
                         <router-link to="/clients/add-new-doctor" class=""><i class="lnr lnr-code"></i> <span>Payroll</span></router-link>
-                    </li>
-                </ul>
-            </div>
-        </li>
-        <li>
-            <a href="#employee" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>Employee</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
-            <div id="employee" class="collapse ">
-                <ul class="nav">
-                    <li>
-                        <router-link to="/clients/add-new-doctor" class=""><i class="lnr lnr-code"></i> <span>Add Employee</span></router-link>
-                    </li>
-                    <li>
-                        <router-link to="/clients/add-new-doctor" class=""><i class="lnr lnr-code"></i> <span>Manage Employee</span></router-link>
                     </li>
                 </ul>
             </div>
