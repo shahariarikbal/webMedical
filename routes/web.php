@@ -62,8 +62,11 @@ Route::group(['prefix' => 'employee/'], function () {
     Route::get('list', 'EmployeeController@list')->name('employee.list');
     Route::get('edit/{id}', 'EmployeeController@edit')->name('employee.edit');
     Route::get('view/{id}', 'EmployeeController@view')->name('employee.view');
+    Route::get('restore/{employee}', 'EmployeeController@restore')->name('employee.restore');
+    Route::get('all/trashed/data', 'EmployeeController@trashList')->name('employee.trash.list');
     Route::post('update/{id}', 'EmployeeController@update')->name('employee.update');
     Route::get('destroy/{employee}', 'EmployeeController@destroy')->name('employee.destroy');
+    Route::get('permanent/destroy/{employee}', 'EmployeeController@permanentDestroy')->name('employee.permanent.destroy');
     Route::get('{path}', 'DashboardController@index')->where( 'path', '.*' );
 });
 

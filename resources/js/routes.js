@@ -9,6 +9,7 @@ import DailyManagePatient from './components/admin/patient/Daily.vue'
 import AddNewEmployee from './components/admin/employee/Add.vue'
 import EmployeeList from './components/admin/employee/List.vue'
 import EmployeeDetails from './components/admin/employee/Details.vue'
+import EmployeeTrashList from './components/admin/employee/Trash.vue'
 export const routes = [
     {
         path:'/clients/dashboard',

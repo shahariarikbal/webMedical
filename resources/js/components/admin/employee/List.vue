@@ -14,7 +14,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <router-link to="/employee/create" class=""> <span class="btn btn-sm btn-primary pull-right manage-font">Add Employee</span></router-link>
-                                    <router-link to="/employee/trash/list"> <span class="btn btn-sm btn-danger manage-font pull-right" style="margin-right: 15px;">Trash List</span></router-link>
+                                    <router-link to="/employee/trash/list/info"> <span class="btn btn-sm btn-danger manage-font pull-right" style="margin-right: 15px;">Trash List</span></router-link>
                                 </div>
                             </div>
                             <br/>

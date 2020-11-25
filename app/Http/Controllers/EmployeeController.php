@@ -62,14 +62,14 @@ class EmployeeController extends Controller
     {
         try {
             $this->validate($request, [
-                'name' => 'required|max:255',
-                'email' => 'required|email|unique:employees,email,'.$id,
-                'phone' => 'required|min:11|max:11',
+                'name'   => 'required|max:255',
+                'email'  => 'required|email|unique:employees,email,'.$id,
+                'phone'  => 'required|min:11|max:11',
                 'avatar' => 'required',
                 'nid_no' => 'required',
-                'designation' => 'required',
+                'designation'  => 'required',
                 'joining_date' => 'required',
-                'dob' => 'required',
+                'dob'    => 'required',
                 'salary' => 'required',
             ]);
 
@@ -114,9 +114,27 @@ class EmployeeController extends Controller
         return Employee::find($id);
     }
 
+    public function trashList()
+    {
+        $trashList =  Employee::onlyTrashed()->get();
+        return $trashList;
+    }
+
+    public function restore($employee)
+    {
+        $restore = Employee::onlyTrashed()->where('id', $employee);
+        $restore->restore();
+        return response()->json();
+    }
+
     public function destroy(Employee $employee)
     {
         $employee->delete();
+        return response()->json();
+    }
+    public function permanentDestroy($employee)
+    {
+        Employee::where('id', $employee)->forceDelete();
         return response()->json();
     }
 }
