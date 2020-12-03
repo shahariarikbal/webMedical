@@ -70,5 +70,12 @@ Route::group(['prefix' => 'employee/'], function () {
     Route::get('{path}', 'DashboardController@index')->where( 'path', '.*' );
 });
 
+Route::group(['prefix' => '/clients/blood/donor/'], function () {
+    Route::post('store', 'BloodDonorController@store')->name('blood.donor.store');
+    Route::get('list','BloodDonorController@list');
+    // Route::get('edit/{id}', 'BloodDonorController@edit')->name('blood.donor.edit');
+    Route::get('{path}', 'DashboardController@index')->where( 'path', '.*' );
+});
+
 
 

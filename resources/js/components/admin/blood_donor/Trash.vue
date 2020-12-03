@@ -7,14 +7,13 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <span class="new-doctor">Employee List</span>
+                                    <span class="new-doctor">Employee Trash List</span>
                                 </div>
                                 <div class="col-md-4">
                                     <input type="text" class="form-control" name="search" v-model="search" placeholder="Search Doctor Phone">
                                 </div>
                                 <div class="col-md-4">
-                                    <router-link to="/employee/create" class=""> <span class="btn btn-sm btn-primary pull-right manage-font">Add Employee</span></router-link>
-                                    <router-link to="/employee/trash/list/info"> <span class="btn btn-sm btn-danger manage-font pull-right" style="margin-right: 15px;">Trash List</span></router-link>
+                                    <router-link to="/employee/manage" class=""> <span class="btn btn-sm btn-primary pull-right manage-font">Employee Manage</span></router-link>
                                 </div>
                             </div>
                             <br/>
@@ -28,8 +27,8 @@
                                     <th width="15%">Phone</th>
                                     <th width="25%">Action</th>
                                 </tr>
-                                <tbody v-if="employeePages.length > 0">
-                                <tr v-for="(employee, index) in employeePages[currentPage -1]" :key="employee.id" style="border: 1px solid #000000; padding: 50px;">
+                                <tbody v-if="trashedEmployeePages.length > 0">
+                                <tr v-for="(employee, index) in trashedEmployeePages[currentPage -1]" :key="employee.id" style="border: 1px solid #000000; padding: 50px;">
                                     <td>{{ index+1 }}</td>
                                     <td>
                                         <img :src="'/employees/' + employee.avatar" alt="avatar" style="width: 50px; height: 50px"><br/>
@@ -43,12 +42,9 @@
                                     <td>{{ employee.salary }}</td>
                                     <td>{{ employee.phone }}</td>
                                     <td>
-                                        <router-link :to="`/employee/details/info/${employee.id}`" class="btn btn-sm btn-primary">
-                                            <i class="fa fa-eye"></i>
-                                        </router-link>
-                                        <router-link :to="`/employee/edit/info/${employee.id}`" type="button" class="btn btn-sm btn-success">
-                                            <i class="fa fa-edit"></i>
-                                        </router-link>
+                                        <button type="button" class="btn btn-sm btn-warning" @click="restore(employee, index)">
+                                            <i class="fa fa-refresh"></i>
+                                        </button>
                                         <button type="button" class="btn btn-sm btn-danger" @click="destroy(employee, index)">
                                             <i class="fa fa-trash"></i>
                                         </button>
@@ -90,8 +86,8 @@
 export default {
     data () {
         return {
-            employees: [],
-            employeePages: [],
+            trashedEmployees: [],
+            trashedEmployeePages: [],
             perPage: 10,
             pageCount: 1,
             currentPage: 1,
@@ -102,9 +98,9 @@ export default {
     watch: {
         search (value) {
             this.setCurrentPage(1)
-            this.generatePages(this.employees)
+            this.generatePages(this.trashedEmployees)
             if (this.search != '') {
-                let search = this.employees.filter(employee => {
+                let search = this.trashedEmployees.filter(employee => {
                     if (employee.phone.indexOf(this.search) !== -1) {
                         return employee
                     }
@@ -114,10 +110,12 @@ export default {
         }
     },
     created() {
-        axios.get('/employee/list')
+        //console.log('tets')
+        axios.get('/employee/all/trashed/data')
             .then(response => {
-                this.employees = response.data
-                this.generatePages(this.employees)
+                //console.log(response.data)
+                this.trashedEmployees = response.data
+                this.generatePages(this.trashedEmployees)
             }).catch(error => {
             console.log(error)
         })
@@ -125,11 +123,23 @@ export default {
     methods : {
         destroy(employee, index) {
             alert('Are You Sure Delete this ?')
-            axios.get('/employee/destroy/' + employee.id)
+            axios.get('/employee/permanent/destroy/' + employee.id)
                 .then(response => {
-                    this.employees.splice(index, 1)
-                    flash('Employee has been deleted')
-                    this.generatePages(this.employees)
+                    this.trashedEmployees.splice(index, 1)
+                    flash('Employee has been permanently deleted')
+                    this.generatePages(this.trashedEmployees)
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+
+        },
+        restore(employee, index) {
+            axios.get('/employee/restore/' + employee.id)
+                .then(response => {
+                    this.trashedEmployees.splice(index, 1)
+                    flash('Employee restore successfully')
+                    this.generatePages(this.trashedEmployees)
                 })
                 .catch(error => {
                     console.log(error)
@@ -139,13 +149,13 @@ export default {
         setCurrentPage (page) {
             this.currentPage = page
         },
-        generatePages (employees) {
-            this.employeePages = _.chunk(employees, this.perPage)
+        generatePages (trashedEmployees) {
+            this.trashedEmployeePages = _.chunk(trashedEmployees, this.perPage)
 
             this.pageCount = 0
-            this.pageCount = this.employeePages.length
+            this.pageCount = this.trashedEmployeePages.length
             if (this.pageCount === 0) {
-                this.message = "Sorry! No employee name found"
+                this.message = "Sorry! No trashed employee name found"
             }
         },
     }

@@ -62,10 +62,10 @@
             <div id="bloodDonors" class="collapse ">
                 <ul class="nav">
                     <li>
-                        <router-link to="/clients/add-new-doctor" class=""><i class="lnr lnr-code"></i> <span>Add Blood Donors</span></router-link>
+                        <router-link to="/clients/blood/donor/add" class=""><i class="lnr lnr-code"></i> <span>Add Blood Donors</span></router-link>
                     </li>
                     <li>
-                        <router-link to="/clients/add-new-doctor" class=""><i class="lnr lnr-code"></i> <span>Blood Donors</span></router-link>
+                        <router-link to="/clients/blood/donor/list" class=""><i class="lnr lnr-code"></i> <span>Blood Donors</span></router-link>
                     </li>
                 </ul>
             </div>
