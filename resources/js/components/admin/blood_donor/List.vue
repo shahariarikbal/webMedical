@@ -13,8 +13,8 @@
                                     <input type="text" class="form-control" name="search" v-model="search" placeholder="Search Blood Donor Phone">
                                 </div>
                                 <div class="col-md-4">
-                                    <router-link to="/clients/blood/donor/add" class=""> <span class="btn btn-sm btn-primary pull-right manage-font">Add Blood Donor</span></router-link>
-                                    <router-link to="/clients/blood/donor/trash/list/info"> <span class="btn btn-sm btn-danger manage-font pull-right" style="margin-right: 15px;">Trash List</span></router-link>
+                                    <router-link to="/blood-donor/add" class=""> <span class="btn btn-sm btn-primary pull-right manage-font">Add Blood Donor</span></router-link>
+                                    <router-link to="/blood-donor/trash/info"> <span class="btn btn-sm btn-danger manage-font pull-right" style="margin-right: 15px;">Trash List</span></router-link>
                                 </div>
                             </div>
                             <br/>
@@ -24,7 +24,7 @@
                                     <th width="15%">Name</th>
                                     <th width="15%">Phone</th>
                                     <th width="15%">Address</th>
-                                    <th width="25%">Action</th>
+                                    <th width="15%">Action</th>
                                 </tr>
                                 <tbody v-if="bloodDonorPages.length > 0">
                                 <tr v-for="(bloodDonor, index) in bloodDonorPages[currentPage -1]" :key="bloodDonor.id" style="border: 1px solid #000000; padding: 50px;">
@@ -34,11 +34,11 @@
                                     </td>
                                     <td>{{ bloodDonor.phone }}</td>
                                     <td>{{ bloodDonor.address }}</td>
-                                    <td>
-                                        <router-link :to="`/bloodDonor/details/info/${employee.id}`" class="btn btn-sm btn-primary">
+                                    <td style="width: 15%">
+                                        <router-link :to="`/bloodDonor/details/info/${bloodDonor.id}`" class="btn btn-sm btn-primary">
                                             <i class="fa fa-eye"></i>
                                         </router-link>
-                                        <router-link :to="`/bloodDonor/edit/info/${employee.id}`" type="button" class="btn btn-sm btn-success">
+                                        <router-link :to="`/bloodDonor/edit/info/${bloodDonor.id}`" type="button" class="btn btn-sm btn-success">
                                             <i class="fa fa-edit"></i>
                                         </router-link>
                                         <button type="button" class="btn btn-sm btn-danger" @click="destroy(bloodDonor, index)">
@@ -106,11 +106,11 @@ export default {
         }
     },
     created() {
-        axios.get('/clients/blood/donor/list')
+        axios.get('/blood-donor/list')
             .then(response => {
-                // this.bloodDonors = response.data
-                console.log(response.data)
-                // this.generatePages(this.bloodDonors)
+                this.bloodDonors = response.data
+                //console.log(response)
+                this.generatePages(this.bloodDonors)
             }).catch(error => {
             console.log(error)
         })
@@ -132,7 +132,7 @@ export default {
         setCurrentPage (page) {
             this.currentPage = page
         },
-        generatePages (employees) {
+        generatePages (bloodDonors) {
             this.bloodDonorPages = _.chunk(bloodDonors, this.perPage)
 
             this.pageCount = 0

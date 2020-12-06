@@ -12,7 +12,7 @@
                     </div>
                     <div class="col-md-4"></div>
                     <div class="col-md-4">
-                        <router-link to="/clients/blood/donor/list" class=""> <span class="btn btn-sm btn-primary pull-right manage-font">Manage Blood Donor</span></router-link>
+                        <router-link to="/blood-donor/list/info" class=""> <span class="btn btn-sm btn-primary pull-right manage-font">Manage Blood Donor</span></router-link>
                     </div>
                 </div>
                 <hr/>
@@ -88,7 +88,7 @@ export default {
             console.log('User cancelled the loader.')
         },
         editBloodDonor () {
-            axios.get(`/client/blood/donor/edit/${this.$route.params.id}`)
+            axios.get(`/blood-donor/edit/${this.$route.params.id}`)
                 .then(response => {
                     if (response.data.name != undefined) {
                             this.editMode      = true,
@@ -106,7 +106,7 @@ export default {
         },
         store () {
             this.isLoading = true
-            axios.post('/clients/blood/donor/store',{
+            axios.post('/blood-donor/store',{
                 name : this.name,
                 phone : this.phone,
                 address : this.address
@@ -115,7 +115,7 @@ export default {
                 if (response.status === 200) {
                     this.isLoading = false
                     flash('New Blood Donor added successfully')
-                    this.$router.push('/clients/blood/donor/list')
+                    this.$router.push('/blood-donor/list/info')
                 }
             }).catch(error => {
                 if (error.response.status === 422) {
@@ -127,7 +127,7 @@ export default {
             })
         },
         update() {
-            
+
         }
     }
 }

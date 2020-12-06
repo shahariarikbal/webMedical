@@ -25,7 +25,7 @@ class BloodDonorController extends Controller
     {
         return response()->json();
     }
-    public function list()
+    public function bloodDonorList()
     {
         $bloodDonor = BloodDonor::all();
         return response()->json($bloodDonor, 200);

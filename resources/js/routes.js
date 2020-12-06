@@ -75,11 +75,11 @@ export const routes = [
         component: EmployeeDetails,
     },
     {
-        path: '/clients/blood/donor/add',
+        path: '/blood-donor/add',
         component: AddNewBloodDonor,
     },
     {
-        path: '/clients/blood/donor/list',
+        path: '/blood-donor/list/info',
         component: BloodDonorList,
     }
 

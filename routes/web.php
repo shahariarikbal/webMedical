@@ -16,6 +16,13 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('config-clear', function () {
+    \Artisan::call('cache:clear');
+    \Artisan::call('config:clear');
+    \Artisan::call('route:clear');
+    dd("All clear!");
+});
+
 Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -70,9 +77,9 @@ Route::group(['prefix' => 'employee/'], function () {
     Route::get('{path}', 'DashboardController@index')->where( 'path', '.*' );
 });
 
-Route::group(['prefix' => '/clients/blood/donor/'], function () {
+Route::group(['prefix' => 'blood-donor/'], function () {
     Route::post('store', 'BloodDonorController@store')->name('blood.donor.store');
-    Route::get('list','BloodDonorController@list');
+    Route::get('list','BloodDonorController@bloodDonorList');
     // Route::get('edit/{id}', 'BloodDonorController@edit')->name('blood.donor.edit');
     Route::get('{path}', 'DashboardController@index')->where( 'path', '.*' );
 });
