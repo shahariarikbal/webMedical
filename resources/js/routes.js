@@ -10,6 +10,9 @@ import AddNewEmployee from './components/admin/employee/Add.vue'
 import EmployeeList from './components/admin/employee/List.vue'
 import EmployeeDetails from './components/admin/employee/Details.vue'
 import EmployeeTrashList from './components/admin/employee/Trash.vue'
+import AddNewBloodDonor from './components/admin/blood_donor/Add.vue'
+import BloodDonorList from './components/admin/blood_donor/List.vue'
+
 export const routes = [
     {
         path:'/clients/dashboard',
@@ -71,4 +74,13 @@ export const routes = [
         path: '/employee/details/info/:id',
         component: EmployeeDetails,
     },
+    {
+        path: '/clients/blood/donor/add',
+        component: AddNewBloodDonor,
+    },
+    {
+        path: '/clients/blood/donor/list',
+        component: BloodDonorList,
+    }
+
 ]

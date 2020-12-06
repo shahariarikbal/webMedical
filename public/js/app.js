@@ -2897,6 +2897,304 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/blood_donor/Add.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/blood_donor/Add.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_loading_overlay__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-loading-overlay */ "./node_modules/vue-loading-overlay/dist/vue-loading.min.js");
+/* harmony import */ var vue_loading_overlay__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-loading-overlay/dist/vue-loading.css */ "./node_modules/vue-loading-overlay/dist/vue-loading.css");
+/* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// Import component
+ // Import stylesheet
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      // Condition
+      isLoading: false,
+      fullPage: true,
+      editMode: false,
+      buttonMode: false,
+      titleMode: false,
+      seen: false,
+      // Store
+      id: '',
+      name: '',
+      phone: '',
+      address: '',
+      //Error Generate
+      errorCount: 0,
+      nameError: '',
+      phoneError: '',
+      addressError: ''
+    };
+  },
+  created: function created() {
+    this.editBloodDonor();
+  },
+  components: {
+    Loading: vue_loading_overlay__WEBPACK_IMPORTED_MODULE_0___default.a
+  },
+  methods: {
+    onCancel: function onCancel() {
+      console.log('User cancelled the loader.');
+    },
+    editBloodDonor: function editBloodDonor() {
+      var _this = this;
+
+      axios.get("/client/blood/donor/edit/".concat(this.$route.params.id)).then(function (response) {
+        if (response.data.name != undefined) {
+          _this.editMode = true, _this.titleMode = true, _this.buttonMode = true, _this.seen = true, _this.id = response.data.id, _this.name = response.data.name, _this.phone = response.data.phone, _this.address = response.data.address;
+        }
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    store: function store() {
+      var _this2 = this;
+
+      this.isLoading = true;
+      axios.post('/clients/blood/donor/store', {
+        name: this.name,
+        phone: this.phone,
+        address: this.address
+      }).then(function (response) {
+        if (response.status === 200) {
+          _this2.isLoading = false;
+          flash('New Blood Donor added successfully');
+
+          _this2.$router.push('/clients/blood/donor/list');
+        }
+      })["catch"](function (error) {
+        if (error.response.status === 422) {
+          _this2.isLoading = false;
+          _this2.nameError = 'Name field is required';
+          _this2.phoneError = 'Phone field is required';
+          _this2.addressError = 'Address field is required';
+        }
+      });
+    },
+    update: function update() {}
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/blood_donor/List.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/blood_donor/List.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      bloodDonors: [],
+      bloodDonorPages: [],
+      perPage: 10,
+      pageCount: 1,
+      currentPage: 1,
+      search: '',
+      message: 'No Data Found'
+    };
+  },
+  watch: {
+    search: function search(value) {
+      var _this = this;
+
+      this.setCurrentPage(1);
+      this.generatePages(this.bloodDonors);
+
+      if (this.search != '') {
+        var search = this.bloodDonors.filter(function (bloodDonor) {
+          if (bloodDonor.phone.indexOf(_this.search) !== -1) {
+            return bloodDonor;
+          }
+        });
+        this.generatePages(search);
+      }
+    }
+  },
+  created: function created() {
+    axios.get('/clients/blood/donor/list').then(function (response) {
+      // this.bloodDonors = response.data
+      console.log(response.data); // this.generatePages(this.bloodDonors)
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  },
+  methods: {
+    destroy: function destroy(bloodDonor, index) {
+      var _this2 = this;
+
+      alert('Are You Sure Delete this ?');
+      axios.get('/bloodDonor/destroy/' + bloodDonor.id).then(function (response) {
+        _this2.bloodDonors.splice(index, 1);
+
+        flash('BloodDonor has been deleted');
+
+        _this2.generatePages(_this2.bloodDonors);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    setCurrentPage: function setCurrentPage(page) {
+      this.currentPage = page;
+    },
+    generatePages: function generatePages(employees) {
+      this.bloodDonorPages = _.chunk(bloodDonors, this.perPage);
+      this.pageCount = 0;
+      this.pageCount = this.bloodDonorPages.length;
+
+      if (this.pageCount === 0) {
+        this.message = "Sorry! No Blood-Donor name found";
+      }
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/employee/Add.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/employee/Add.vue?vue&type=script&lang=js& ***!
@@ -3446,9 +3744,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this2 = this;
 
-    //console.log('tets')
     axios.get('/employee/list').then(function (response) {
-      //console.log(response.data)
       _this2.employees = response.data;
 
       _this2.generatePages(_this2.employees);
@@ -8774,7 +9070,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.flash-message {\n    position: fixed;\n    right: 25px;\n    bottom: 50px;\n}\n.msg-bg {\n    background: rgb(0, 0, 0); /* Fallback color */\n}\n", ""]);
+exports.push([module.i, "\n.flash-message {\r\n    position: fixed;\r\n    right: 25px;\r\n    bottom: 50px;\n}\n.msg-bg {\r\n    background: rgb(0, 0, 0); /* Fallback color */\n}\r\n", ""]);
 
 // exports
 
@@ -8838,6 +9134,44 @@ exports.push([module.i, "\n#doctors[data-v-b5454df0] {\r\n    font-family: Arial
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/blood_donor/Add.vue?vue&type=style&index=0&id=5a9937d8&scoped=true&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/blood_donor/Add.vue?vue&type=style&index=0&id=5a9937d8&scoped=true&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.manage-font[data-v-5a9937d8] {\r\n    font-size: 15px;\n}\n.new-doctor[data-v-5a9937d8] {\r\n    font-size: 24px;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/blood_donor/List.vue?vue&type=style&index=0&id=d5e77a12&scoped=true&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/blood_donor/List.vue?vue&type=style&index=0&id=d5e77a12&scoped=true&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n#employee[data-v-d5e77a12] {\r\n    font-family: Arial, Helvetica, sans-serif;\r\n    border-collapse: collapse;\r\n    width: 100%;\n}\n#employee td[data-v-d5e77a12], #employee th[data-v-d5e77a12] {\r\n    border: 1px solid #ddd;\r\n    padding: 8px;\n}\n#employee tr[data-v-d5e77a12]:nth-child(even){background-color: #f2f2f2;}\n#employee tr[data-v-d5e77a12]:hover {background-color: #ddd;}\n#employee th[data-v-d5e77a12] {\r\n    padding-top: 12px;\r\n    padding-bottom: 12px;\r\n    text-align: left;\r\n    background-color: #000000;\r\n    color: white;\n}\n.manage-font[data-v-d5e77a12] {\r\n    font-size: 15px;\n}\n.new-doctor[data-v-d5e77a12] {\r\n    font-size: 24px;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/employee/Add.vue?vue&type=style&index=0&id=053adc2a&scoped=true&lang=css&":
 /*!************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/employee/Add.vue?vue&type=style&index=0&id=053adc2a&scoped=true&lang=css& ***!
@@ -8850,7 +9184,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.manage-font[data-v-053adc2a] {\n    font-size: 15px;\n}\n.new-doctor[data-v-053adc2a] {\n    font-size: 24px;\n}\n", ""]);
+exports.push([module.i, "\n.manage-font[data-v-053adc2a] {\r\n    font-size: 15px;\n}\n.new-doctor[data-v-053adc2a] {\r\n    font-size: 24px;\n}\r\n", ""]);
 
 // exports
 
@@ -8869,7 +9203,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.avatar[data-v-6f8b6a0c] {\n    vertical-align: middle;\n    width: 150px;\n    height: 150px;\n    border-radius: 50%;\n}\n.fonts[data-v-6f8b6a0c] {\n    font-size: 15px;\n    color: #ffffff;\n}\n.fonts-line-height[data-v-6f8b6a0c] {\n    line-height: 24px;\n}\n#employee[data-v-6f8b6a0c] {\n    font-family: Arial, Helvetica, sans-serif;\n    border-collapse: collapse;\n    width: 100%;\n}\n#employee td[data-v-6f8b6a0c], #employee th[data-v-6f8b6a0c] {\n    border: 1px solid #ddd;\n    padding: 8px;\n}\n#employee tr[data-v-6f8b6a0c]:nth-child(even){background-color: #f2f2f2;}\n#employee tr[data-v-6f8b6a0c]:hover {background-color: #ddd;}\n#employee th[data-v-6f8b6a0c] {\n    padding-top: 12px;\n    padding-bottom: 12px;\n    text-align: left;\n    /*background-color: #4CAF50;*/\n    color: black;\n}\n/* changes */\n.card[data-v-6f8b6a0c] {\n    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n    max-width: 600px;\n    margin: auto;\n    text-align: center;\n    font-family: arial;\n}\n.title[data-v-6f8b6a0c] {\n    color: grey;\n    font-size: 18px;\n}\nbutton[data-v-6f8b6a0c] {\n    border: none;\n    outline: 0;\n    display: inline-block;\n    padding: 8px;\n    color: white;\n    background-color: #000;\n    text-align: center;\n    cursor: pointer;\n    width: 100%;\n    font-size: 18px;\n}\na[data-v-6f8b6a0c] {\n    text-decoration: none;\n    font-size: 22px;\n    color: black;\n}\nbutton[data-v-6f8b6a0c]:hover, a[data-v-6f8b6a0c]:hover {\n    opacity: 0.7;\n}\n", ""]);
+exports.push([module.i, "\n.avatar[data-v-6f8b6a0c] {\r\n    vertical-align: middle;\r\n    width: 150px;\r\n    height: 150px;\r\n    border-radius: 50%;\n}\n.fonts[data-v-6f8b6a0c] {\r\n    font-size: 15px;\r\n    color: #ffffff;\n}\n.fonts-line-height[data-v-6f8b6a0c] {\r\n    line-height: 24px;\n}\n#employee[data-v-6f8b6a0c] {\r\n    font-family: Arial, Helvetica, sans-serif;\r\n    border-collapse: collapse;\r\n    width: 100%;\n}\n#employee td[data-v-6f8b6a0c], #employee th[data-v-6f8b6a0c] {\r\n    border: 1px solid #ddd;\r\n    padding: 8px;\n}\n#employee tr[data-v-6f8b6a0c]:nth-child(even){background-color: #f2f2f2;}\n#employee tr[data-v-6f8b6a0c]:hover {background-color: #ddd;}\n#employee th[data-v-6f8b6a0c] {\r\n    padding-top: 12px;\r\n    padding-bottom: 12px;\r\n    text-align: left;\r\n    /*background-color: #4CAF50;*/\r\n    color: black;\n}\r\n/* changes */\n.card[data-v-6f8b6a0c] {\r\n    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\r\n    max-width: 600px;\r\n    margin: auto;\r\n    text-align: center;\r\n    font-family: arial;\n}\n.title[data-v-6f8b6a0c] {\r\n    color: grey;\r\n    font-size: 18px;\n}\nbutton[data-v-6f8b6a0c] {\r\n    border: none;\r\n    outline: 0;\r\n    display: inline-block;\r\n    padding: 8px;\r\n    color: white;\r\n    background-color: #000;\r\n    text-align: center;\r\n    cursor: pointer;\r\n    width: 100%;\r\n    font-size: 18px;\n}\na[data-v-6f8b6a0c] {\r\n    text-decoration: none;\r\n    font-size: 22px;\r\n    color: black;\n}\nbutton[data-v-6f8b6a0c]:hover, a[data-v-6f8b6a0c]:hover {\r\n    opacity: 0.7;\n}\r\n", ""]);
 
 // exports
 
@@ -8888,7 +9222,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n#employee[data-v-4b6e2b44] {\n    font-family: Arial, Helvetica, sans-serif;\n    border-collapse: collapse;\n    width: 100%;\n}\n#employee td[data-v-4b6e2b44], #employee th[data-v-4b6e2b44] {\n    border: 1px solid #ddd;\n    padding: 8px;\n}\n#employee tr[data-v-4b6e2b44]:nth-child(even){background-color: #f2f2f2;}\n#employee tr[data-v-4b6e2b44]:hover {background-color: #ddd;}\n#employee th[data-v-4b6e2b44] {\n    padding-top: 12px;\n    padding-bottom: 12px;\n    text-align: left;\n    background-color: #000000;\n    color: white;\n}\n.manage-font[data-v-4b6e2b44] {\n    font-size: 15px;\n}\n.new-doctor[data-v-4b6e2b44] {\n    font-size: 24px;\n}\n", ""]);
+exports.push([module.i, "\n#employee[data-v-4b6e2b44] {\r\n    font-family: Arial, Helvetica, sans-serif;\r\n    border-collapse: collapse;\r\n    width: 100%;\n}\n#employee td[data-v-4b6e2b44], #employee th[data-v-4b6e2b44] {\r\n    border: 1px solid #ddd;\r\n    padding: 8px;\n}\n#employee tr[data-v-4b6e2b44]:nth-child(even){background-color: #f2f2f2;}\n#employee tr[data-v-4b6e2b44]:hover {background-color: #ddd;}\n#employee th[data-v-4b6e2b44] {\r\n    padding-top: 12px;\r\n    padding-bottom: 12px;\r\n    text-align: left;\r\n    background-color: #000000;\r\n    color: white;\n}\n.manage-font[data-v-4b6e2b44] {\r\n    font-size: 15px;\n}\n.new-doctor[data-v-4b6e2b44] {\r\n    font-size: 24px;\n}\r\n", ""]);
 
 // exports
 
@@ -8907,7 +9241,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n#employee[data-v-96de36fc] {\n    font-family: Arial, Helvetica, sans-serif;\n    border-collapse: collapse;\n    width: 100%;\n}\n#employee td[data-v-96de36fc], #employee th[data-v-96de36fc] {\n    border: 1px solid #ddd;\n    padding: 8px;\n}\n#employee tr[data-v-96de36fc]:nth-child(even){background-color: #f2f2f2;}\n#employee tr[data-v-96de36fc]:hover {background-color: #ddd;}\n#employee th[data-v-96de36fc] {\n    padding-top: 12px;\n    padding-bottom: 12px;\n    text-align: left;\n    background-color: #000000;\n    color: white;\n}\n.manage-font[data-v-96de36fc] {\n    font-size: 15px;\n}\n.new-doctor[data-v-96de36fc] {\n    font-size: 24px;\n}\n", ""]);
+exports.push([module.i, "\n#employee[data-v-96de36fc] {\r\n    font-family: Arial, Helvetica, sans-serif;\r\n    border-collapse: collapse;\r\n    width: 100%;\n}\n#employee td[data-v-96de36fc], #employee th[data-v-96de36fc] {\r\n    border: 1px solid #ddd;\r\n    padding: 8px;\n}\n#employee tr[data-v-96de36fc]:nth-child(even){background-color: #f2f2f2;}\n#employee tr[data-v-96de36fc]:hover {background-color: #ddd;}\n#employee th[data-v-96de36fc] {\r\n    padding-top: 12px;\r\n    padding-bottom: 12px;\r\n    text-align: left;\r\n    background-color: #000000;\r\n    color: white;\n}\n.manage-font[data-v-96de36fc] {\r\n    font-size: 15px;\n}\n.new-doctor[data-v-96de36fc] {\r\n    font-size: 24px;\n}\r\n", ""]);
 
 // exports
 
@@ -8926,7 +9260,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.manage-font[data-v-321fe97c] {\n    font-size: 15px;\n}\n.new-doctor[data-v-321fe97c] {\n    font-size: 24px;\n}\n", ""]);
+exports.push([module.i, "\n.manage-font[data-v-321fe97c] {\r\n    font-size: 15px;\n}\n.new-doctor[data-v-321fe97c] {\r\n    font-size: 24px;\n}\r\n", ""]);
 
 // exports
 
@@ -40201,6 +40535,66 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/blood_donor/Add.vue?vue&type=style&index=0&id=5a9937d8&scoped=true&lang=css&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/blood_donor/Add.vue?vue&type=style&index=0&id=5a9937d8&scoped=true&lang=css& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Add.vue?vue&type=style&index=0&id=5a9937d8&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/blood_donor/Add.vue?vue&type=style&index=0&id=5a9937d8&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/blood_donor/List.vue?vue&type=style&index=0&id=d5e77a12&scoped=true&lang=css&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/blood_donor/List.vue?vue&type=style&index=0&id=d5e77a12&scoped=true&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./List.vue?vue&type=style&index=0&id=d5e77a12&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/blood_donor/List.vue?vue&type=style&index=0&id=d5e77a12&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/employee/Add.vue?vue&type=style&index=0&id=053adc2a&scoped=true&lang=css&":
 /*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/employee/Add.vue?vue&type=style&index=0&id=053adc2a&scoped=true&lang=css& ***!
@@ -42404,6 +42798,527 @@ var render = function() {
   return _c("div", { attrs: { id: "adminMain" } }, [_c("router-view")], 1)
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/blood_donor/Add.vue?vue&type=template&id=5a9937d8&scoped=true&":
+/*!************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/blood_donor/Add.vue?vue&type=template&id=5a9937d8&scoped=true& ***!
+  \************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container-fluid" }, [
+    _c(
+      "div",
+      { staticClass: "panel vld-parent" },
+      [
+        _c("loading", {
+          attrs: {
+            active: _vm.isLoading,
+            "can-cancel": true,
+            "on-cancel": _vm.onCancel,
+            "is-full-page": _vm.fullPage
+          },
+          on: {
+            "update:active": function($event) {
+              _vm.isLoading = $event
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "panel-body" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-4" }, [
+              _c("span", { staticClass: "new-doctor" }, [
+                _vm._v(
+                  _vm._s(
+                    _vm.titleMode
+                      ? "Update Blood Donor Information"
+                      : "Add New Blood Donor"
+                  )
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-4" }),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-md-4" },
+              [
+                _c(
+                  "router-link",
+                  { attrs: { to: "/clients/blood/donor/list" } },
+                  [
+                    _c(
+                      "span",
+                      {
+                        staticClass:
+                          "btn btn-sm btn-primary pull-right manage-font"
+                      },
+                      [_vm._v("Manage Blood Donor")]
+                    )
+                  ]
+                )
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-12" }, [
+            _c(
+              "form",
+              {
+                attrs: { method: "POST" },
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    _vm.editMode ? _vm.update() : _vm.store()
+                  }
+                }
+              },
+              [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.id,
+                      expression: "id"
+                    }
+                  ],
+                  attrs: { type: "hidden", id: "id", name: "id" },
+                  domProps: { value: _vm.id },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.id = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", [_vm._v("Name")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.name,
+                            expression: "name"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "name",
+                          placeholder: "Blood Donor name"
+                        },
+                        domProps: { value: _vm.name },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.name = $event.target.value
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "text-danger" }, [
+                        _vm._v(_vm._s(_vm.nameError))
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", [_vm._v("Phone")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.phone,
+                            expression: "phone"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "number",
+                          name: "phone",
+                          placeholder: "Blood Donor Phone Number"
+                        },
+                        domProps: { value: _vm.phone },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.phone = $event.target.value
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "text-danger" }, [
+                        _vm._v(_vm._s(_vm.phoneError))
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-5" }, [
+                    _c("label", [_vm._v("Address")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.address,
+                          expression: "address"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "address",
+                        placeholder: "Blood Donor Address"
+                      },
+                      domProps: { value: _vm.address },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.address = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "text-danger" }, [
+                      _vm._v(_vm._s(_vm.addressError))
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass:
+                      "btn btn-sm btn-success pull-right manage-font",
+                    attrs: { type: "submit" }
+                  },
+                  [_vm._v(_vm._s(_vm.buttonMode ? "Update" : "Create"))]
+                )
+              ]
+            )
+          ])
+        ])
+      ],
+      1
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/blood_donor/List.vue?vue&type=template&id=d5e77a12&scoped=true&":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin/blood_donor/List.vue?vue&type=template&id=d5e77a12&scoped=true& ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("section", { staticClass: "content" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "col-md-12" }, [
+          _c("div", { staticClass: "panel" }, [
+            _c("div", { staticClass: "panel-body" }, [
+              _c("div", { staticClass: "row" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.search,
+                        expression: "search"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "search",
+                      placeholder: "Search Blood Donor Phone"
+                    },
+                    domProps: { value: _vm.search },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.search = $event.target.value
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-md-4" },
+                  [
+                    _c(
+                      "router-link",
+                      { attrs: { to: "/clients/blood/donor/add" } },
+                      [
+                        _c(
+                          "span",
+                          {
+                            staticClass:
+                              "btn btn-sm btn-primary pull-right manage-font"
+                          },
+                          [_vm._v("Add Blood Donor")]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "router-link",
+                      { attrs: { to: "/clients/blood/donor/trash/list/info" } },
+                      [
+                        _c(
+                          "span",
+                          {
+                            staticClass:
+                              "btn btn-sm btn-danger manage-font pull-right",
+                            staticStyle: { "margin-right": "15px" }
+                          },
+                          [_vm._v("Trash List")]
+                        )
+                      ]
+                    )
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("br"),
+              _vm._v(" "),
+              _c("table", { attrs: { id: "employee" } }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _vm.bloodDonorPages.length > 0
+                  ? _c(
+                      "tbody",
+                      _vm._l(_vm.bloodDonorPages[_vm.currentPage - 1], function(
+                        bloodDonor,
+                        index
+                      ) {
+                        return _c(
+                          "tr",
+                          {
+                            key: bloodDonor.id,
+                            staticStyle: {
+                              border: "1px solid #000000",
+                              padding: "50px"
+                            }
+                          },
+                          [
+                            _c("td", [_vm._v(_vm._s(index + 1))]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _c(
+                                "span",
+                                {
+                                  staticStyle: {
+                                    "text-transform": "capitalize"
+                                  }
+                                },
+                                [_vm._v(_vm._s(bloodDonor.name))]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(bloodDonor.phone))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(bloodDonor.address))]),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    staticClass: "btn btn-sm btn-primary",
+                                    attrs: {
+                                      to:
+                                        "/bloodDonor/details/info/" +
+                                        _vm.employee.id
+                                    }
+                                  },
+                                  [_c("i", { staticClass: "fa fa-eye" })]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "router-link",
+                                  {
+                                    staticClass: "btn btn-sm btn-success",
+                                    attrs: {
+                                      to:
+                                        "/bloodDonor/edit/info/" +
+                                        _vm.employee.id,
+                                      type: "button"
+                                    }
+                                  },
+                                  [_c("i", { staticClass: "fa fa-edit" })]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-sm btn-danger",
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.destroy(bloodDonor, index)
+                                      }
+                                    }
+                                  },
+                                  [_c("i", { staticClass: "fa fa-trash" })]
+                                )
+                              ],
+                              1
+                            )
+                          ]
+                        )
+                      }),
+                      0
+                    )
+                  : _c("tbody", [
+                      _c("tr", [
+                        _c(
+                          "td",
+                          {
+                            staticStyle: { "background-color": "orangered" },
+                            attrs: { colspan: "7", role: "alert" }
+                          },
+                          [
+                            _c(
+                              "span",
+                              {
+                                staticStyle: {
+                                  color: "white",
+                                  "font-size": "18px"
+                                }
+                              },
+                              [_vm._v(_vm._s(_vm.message))]
+                            )
+                          ]
+                        )
+                      ])
+                    ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-12" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-4" }),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-md-4" },
+                    [
+                      _vm.pageCount > 1
+                        ? _c("paginate", {
+                            attrs: {
+                              "page-count": _vm.pageCount,
+                              "prev-text": "Prev",
+                              "next-text": "Next",
+                              "container-class":
+                                "pagination justify-content-center"
+                            },
+                            model: {
+                              value: _vm.currentPage,
+                              callback: function($$v) {
+                                _vm.currentPage = $$v
+                              },
+                              expression: "currentPage"
+                            }
+                          })
+                        : _vm._e()
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" })
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-4" }, [
+      _c("span", { staticClass: "new-doctor" }, [_vm._v("Blood Donor List")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", { attrs: { width: "5%" } }, [_vm._v("SL")]),
+      _vm._v(" "),
+      _c("th", { attrs: { width: "15%" } }, [_vm._v("Name")]),
+      _vm._v(" "),
+      _c("th", { attrs: { width: "15%" } }, [_vm._v("Phone")]),
+      _vm._v(" "),
+      _c("th", { attrs: { width: "15%" } }, [_vm._v("Address")]),
+      _vm._v(" "),
+      _c("th", { attrs: { width: "25%" } }, [_vm._v("Action")])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -60493,6 +61408,180 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/admin/blood_donor/Add.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/admin/blood_donor/Add.vue ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Add_vue_vue_type_template_id_5a9937d8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Add.vue?vue&type=template&id=5a9937d8&scoped=true& */ "./resources/js/components/admin/blood_donor/Add.vue?vue&type=template&id=5a9937d8&scoped=true&");
+/* harmony import */ var _Add_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Add.vue?vue&type=script&lang=js& */ "./resources/js/components/admin/blood_donor/Add.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _Add_vue_vue_type_style_index_0_id_5a9937d8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Add.vue?vue&type=style&index=0&id=5a9937d8&scoped=true&lang=css& */ "./resources/js/components/admin/blood_donor/Add.vue?vue&type=style&index=0&id=5a9937d8&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _Add_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Add_vue_vue_type_template_id_5a9937d8_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Add_vue_vue_type_template_id_5a9937d8_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "5a9937d8",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/admin/blood_donor/Add.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/blood_donor/Add.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/admin/blood_donor/Add.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Add.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/blood_donor/Add.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/blood_donor/Add.vue?vue&type=style&index=0&id=5a9937d8&scoped=true&lang=css&":
+/*!********************************************************************************************************************!*\
+  !*** ./resources/js/components/admin/blood_donor/Add.vue?vue&type=style&index=0&id=5a9937d8&scoped=true&lang=css& ***!
+  \********************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_style_index_0_id_5a9937d8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Add.vue?vue&type=style&index=0&id=5a9937d8&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/blood_donor/Add.vue?vue&type=style&index=0&id=5a9937d8&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_style_index_0_id_5a9937d8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_style_index_0_id_5a9937d8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_style_index_0_id_5a9937d8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_style_index_0_id_5a9937d8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_style_index_0_id_5a9937d8_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/blood_donor/Add.vue?vue&type=template&id=5a9937d8&scoped=true&":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/components/admin/blood_donor/Add.vue?vue&type=template&id=5a9937d8&scoped=true& ***!
+  \******************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_template_id_5a9937d8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Add.vue?vue&type=template&id=5a9937d8&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/blood_donor/Add.vue?vue&type=template&id=5a9937d8&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_template_id_5a9937d8_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Add_vue_vue_type_template_id_5a9937d8_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/blood_donor/List.vue":
+/*!************************************************************!*\
+  !*** ./resources/js/components/admin/blood_donor/List.vue ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _List_vue_vue_type_template_id_d5e77a12_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./List.vue?vue&type=template&id=d5e77a12&scoped=true& */ "./resources/js/components/admin/blood_donor/List.vue?vue&type=template&id=d5e77a12&scoped=true&");
+/* harmony import */ var _List_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./List.vue?vue&type=script&lang=js& */ "./resources/js/components/admin/blood_donor/List.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _List_vue_vue_type_style_index_0_id_d5e77a12_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./List.vue?vue&type=style&index=0&id=d5e77a12&scoped=true&lang=css& */ "./resources/js/components/admin/blood_donor/List.vue?vue&type=style&index=0&id=d5e77a12&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _List_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _List_vue_vue_type_template_id_d5e77a12_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _List_vue_vue_type_template_id_d5e77a12_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "d5e77a12",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/admin/blood_donor/List.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/blood_donor/List.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/admin/blood_donor/List.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_List_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./List.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/blood_donor/List.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_List_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/blood_donor/List.vue?vue&type=style&index=0&id=d5e77a12&scoped=true&lang=css&":
+/*!*********************************************************************************************************************!*\
+  !*** ./resources/js/components/admin/blood_donor/List.vue?vue&type=style&index=0&id=d5e77a12&scoped=true&lang=css& ***!
+  \*********************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_List_vue_vue_type_style_index_0_id_d5e77a12_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./List.vue?vue&type=style&index=0&id=d5e77a12&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/blood_donor/List.vue?vue&type=style&index=0&id=d5e77a12&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_List_vue_vue_type_style_index_0_id_d5e77a12_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_List_vue_vue_type_style_index_0_id_d5e77a12_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_List_vue_vue_type_style_index_0_id_d5e77a12_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_List_vue_vue_type_style_index_0_id_d5e77a12_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_List_vue_vue_type_style_index_0_id_d5e77a12_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/admin/blood_donor/List.vue?vue&type=template&id=d5e77a12&scoped=true&":
+/*!*******************************************************************************************************!*\
+  !*** ./resources/js/components/admin/blood_donor/List.vue?vue&type=template&id=d5e77a12&scoped=true& ***!
+  \*******************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_List_vue_vue_type_template_id_d5e77a12_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./List.vue?vue&type=template&id=d5e77a12&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin/blood_donor/List.vue?vue&type=template&id=d5e77a12&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_List_vue_vue_type_template_id_d5e77a12_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_List_vue_vue_type_template_id_d5e77a12_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/admin/employee/Add.vue":
 /*!********************************************************!*\
   !*** ./resources/js/components/admin/employee/Add.vue ***!
@@ -61193,6 +62282,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_admin_employee_List_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/admin/employee/List.vue */ "./resources/js/components/admin/employee/List.vue");
 /* harmony import */ var _components_admin_employee_Details_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/admin/employee/Details.vue */ "./resources/js/components/admin/employee/Details.vue");
 /* harmony import */ var _components_admin_employee_Trash_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/admin/employee/Trash.vue */ "./resources/js/components/admin/employee/Trash.vue");
+/* harmony import */ var _components_admin_blood_donor_Add_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/admin/blood_donor/Add.vue */ "./resources/js/components/admin/blood_donor/Add.vue");
+/* harmony import */ var _components_admin_blood_donor_List_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/admin/blood_donor/List.vue */ "./resources/js/components/admin/blood_donor/List.vue");
+
+
 
 
 
@@ -61250,6 +62343,12 @@ var routes = [{
 }, {
   path: '/employee/details/info/:id',
   component: _components_admin_employee_Details_vue__WEBPACK_IMPORTED_MODULE_10__["default"]
+}, {
+  path: '/clients/blood/donor/add',
+  component: _components_admin_blood_donor_Add_vue__WEBPACK_IMPORTED_MODULE_12__["default"]
+}, {
+  path: '/clients/blood/donor/list',
+  component: _components_admin_blood_donor_List_vue__WEBPACK_IMPORTED_MODULE_13__["default"]
 }];
 
 /***/ }),
@@ -61272,8 +62371,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\webmedical\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\webmedical\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\xampp\htdocs\webMedical\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\xampp\htdocs\webMedical\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

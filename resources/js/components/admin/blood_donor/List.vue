@@ -7,49 +7,41 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <span class="new-doctor">Employee List</span>
+                                    <span class="new-doctor">Blood Donor List</span>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="text" class="form-control" name="search" v-model="search" placeholder="Search Doctor Phone">
+                                    <input type="text" class="form-control" name="search" v-model="search" placeholder="Search Blood Donor Phone">
                                 </div>
                                 <div class="col-md-4">
-                                    <router-link to="/employee/create" class=""> <span class="btn btn-sm btn-primary pull-right manage-font">Add Employee</span></router-link>
-                                    <router-link to="/employee/trash/list/info"> <span class="btn btn-sm btn-danger manage-font pull-right" style="margin-right: 15px;">Trash List</span></router-link>
+                                    <router-link to="/clients/blood/donor/add" class=""> <span class="btn btn-sm btn-primary pull-right manage-font">Add Blood Donor</span></router-link>
+                                    <router-link to="/clients/blood/donor/trash/list/info"> <span class="btn btn-sm btn-danger manage-font pull-right" style="margin-right: 15px;">Trash List</span></router-link>
                                 </div>
                             </div>
                             <br/>
                             <table id="employee">
                                 <tr>
                                     <th width="5%">SL</th>
-                                    <th width="10%">Avatar</th>
                                     <th width="15%">Name</th>
-                                    <th width="25%">Designation</th>
-                                    <th width="10%">Salary</th>
                                     <th width="15%">Phone</th>
+                                    <th width="15%">Address</th>
                                     <th width="25%">Action</th>
                                 </tr>
-                                <tbody v-if="employeePages.length > 0">
-                                <tr v-for="(employee, index) in employeePages[currentPage -1]" :key="employee.id" style="border: 1px solid #000000; padding: 50px;">
+                                <tbody v-if="bloodDonorPages.length > 0">
+                                <tr v-for="(bloodDonor, index) in bloodDonorPages[currentPage -1]" :key="bloodDonor.id" style="border: 1px solid #000000; padding: 50px;">
                                     <td>{{ index+1 }}</td>
                                     <td>
-                                        <img :src="'/employees/' + employee.avatar" alt="avatar" style="width: 50px; height: 50px"><br/>
+                                        <span style="text-transform: capitalize">{{ bloodDonor.name }}</span>
                                     </td>
+                                    <td>{{ bloodDonor.phone }}</td>
+                                    <td>{{ bloodDonor.address }}</td>
                                     <td>
-                                        <span style="text-transform: capitalize">{{ employee.name }}</span>
-                                    </td>
-                                    <td>
-                                        <span style="text-transform: uppercase; font-weight: bold">{{ employee.designation }}</span>
-                                    </td>
-                                    <td>{{ employee.salary }}</td>
-                                    <td>{{ employee.phone }}</td>
-                                    <td>
-                                        <router-link :to="`/employee/details/info/${employee.id}`" class="btn btn-sm btn-primary">
+                                        <router-link :to="`/bloodDonor/details/info/${employee.id}`" class="btn btn-sm btn-primary">
                                             <i class="fa fa-eye"></i>
                                         </router-link>
-                                        <router-link :to="`/employee/edit/info/${employee.id}`" type="button" class="btn btn-sm btn-success">
+                                        <router-link :to="`/bloodDonor/edit/info/${employee.id}`" type="button" class="btn btn-sm btn-success">
                                             <i class="fa fa-edit"></i>
                                         </router-link>
-                                        <button type="button" class="btn btn-sm btn-danger" @click="destroy(employee, index)">
+                                        <button type="button" class="btn btn-sm btn-danger" @click="destroy(bloodDonor, index)">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </td>
@@ -57,7 +49,7 @@
                                 </tbody>
                                 <tbody v-else>
                                 <tr>
-                                    <td colspan="7" style="background-color: orangered" role="alert"><span style="color: black; font-size: 18px;">{{ message }}</span></td>
+                                    <td colspan="7" style="background-color: orangered" role="alert"><span style="color: black; font-size: 18px;color:white;">{{ message }}</span></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -90,8 +82,8 @@
 export default {
     data () {
         return {
-            employees: [],
-            employeePages: [],
+            bloodDonors: [],
+            bloodDonorPages: [],
             perPage: 10,
             pageCount: 1,
             currentPage: 1,
@@ -102,11 +94,11 @@ export default {
     watch: {
         search (value) {
             this.setCurrentPage(1)
-            this.generatePages(this.employees)
+            this.generatePages(this.bloodDonors)
             if (this.search != '') {
-                let search = this.employees.filter(employee => {
-                    if (employee.phone.indexOf(this.search) !== -1) {
-                        return employee
+                let search = this.bloodDonors.filter(bloodDonor => {
+                    if (bloodDonor.phone.indexOf(this.search) !== -1) {
+                        return bloodDonor
                     }
                 })
                 this.generatePages(search)
@@ -114,22 +106,23 @@ export default {
         }
     },
     created() {
-        axios.get('/employee/list')
+        axios.get('/clients/blood/donor/list')
             .then(response => {
-                this.employees = response.data
-                this.generatePages(this.employees)
+                // this.bloodDonors = response.data
+                console.log(response.data)
+                // this.generatePages(this.bloodDonors)
             }).catch(error => {
             console.log(error)
         })
     },
     methods : {
-        destroy(employee, index) {
+        destroy(bloodDonor, index) {
             alert('Are You Sure Delete this ?')
-            axios.get('/employee/destroy/' + employee.id)
+            axios.get('/bloodDonor/destroy/' + bloodDonor.id)
                 .then(response => {
-                    this.employees.splice(index, 1)
-                    flash('Employee has been deleted')
-                    this.generatePages(this.employees)
+                    this.bloodDonors.splice(index, 1)
+                    flash('BloodDonor has been deleted')
+                    this.generatePages(this.bloodDonors)
                 })
                 .catch(error => {
                     console.log(error)
@@ -140,12 +133,12 @@ export default {
             this.currentPage = page
         },
         generatePages (employees) {
-            this.employeePages = _.chunk(employees, this.perPage)
+            this.bloodDonorPages = _.chunk(bloodDonors, this.perPage)
 
             this.pageCount = 0
-            this.pageCount = this.employeePages.length
+            this.pageCount = this.bloodDonorPages.length
             if (this.pageCount === 0) {
-                this.message = "Sorry! No employee name found"
+                this.message = "Sorry! No Blood-Donor name found"
             }
         },
     }
