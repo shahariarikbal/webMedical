@@ -9073,7 +9073,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.flash-message {\n    position: fixed;\n    right: 25px;\n    bottom: 50px;\n}\n.msg-bg {\n    background: rgb(0, 0, 0); /* Fallback color */\n}\n", ""]);
+exports.push([module.i, "\n.flash-message {\r\n    position: fixed;\r\n    right: 25px;\r\n    bottom: 50px;\n}\n.msg-bg {\r\n    background: rgb(0, 0, 0); /* Fallback color */\n}\r\n", ""]);
 
 // exports
 
@@ -9149,7 +9149,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.manage-font[data-v-5a9937d8] {\n    font-size: 15px;\n}\n.new-doctor[data-v-5a9937d8] {\n    font-size: 24px;\n}\n", ""]);
+exports.push([module.i, "\n.manage-font[data-v-5a9937d8] {\r\n    font-size: 15px;\n}\n.new-doctor[data-v-5a9937d8] {\r\n    font-size: 24px;\n}\r\n", ""]);
 
 // exports
 
@@ -9168,7 +9168,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n#employee[data-v-d5e77a12] {\n    font-family: Arial, Helvetica, sans-serif;\n    border-collapse: collapse;\n    width: 100%;\n}\n#employee td[data-v-d5e77a12], #employee th[data-v-d5e77a12] {\n    border: 1px solid #ddd;\n    padding: 8px;\n}\n#employee tr[data-v-d5e77a12]:nth-child(even){background-color: #f2f2f2;}\n#employee tr[data-v-d5e77a12]:hover {background-color: #ddd;}\n#employee th[data-v-d5e77a12] {\n    padding-top: 12px;\n    padding-bottom: 12px;\n    text-align: left;\n    background-color: #000000;\n    color: white;\n}\n.manage-font[data-v-d5e77a12] {\n    font-size: 15px;\n}\n.new-doctor[data-v-d5e77a12] {\n    font-size: 24px;\n}\n", ""]);
+exports.push([module.i, "\n#employee[data-v-d5e77a12] {\r\n    font-family: Arial, Helvetica, sans-serif;\r\n    border-collapse: collapse;\r\n    width: 100%;\n}\n#employee td[data-v-d5e77a12], #employee th[data-v-d5e77a12] {\r\n    border: 1px solid #ddd;\r\n    padding: 8px;\n}\n#employee tr[data-v-d5e77a12]:nth-child(even){background-color: #f2f2f2;}\n#employee tr[data-v-d5e77a12]:hover {background-color: #ddd;}\n#employee th[data-v-d5e77a12] {\r\n    padding-top: 12px;\r\n    padding-bottom: 12px;\r\n    text-align: left;\r\n    background-color: #000000;\r\n    color: white;\n}\n.manage-font[data-v-d5e77a12] {\r\n    font-size: 15px;\n}\n.new-doctor[data-v-d5e77a12] {\r\n    font-size: 24px;\n}\r\n", ""]);
 
 // exports
 
@@ -9187,7 +9187,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.manage-font[data-v-053adc2a] {\n    font-size: 15px;\n}\n.new-doctor[data-v-053adc2a] {\n    font-size: 24px;\n}\n", ""]);
+exports.push([module.i, "\n.manage-font[data-v-053adc2a] {\r\n    font-size: 15px;\n}\n.new-doctor[data-v-053adc2a] {\r\n    font-size: 24px;\n}\r\n", ""]);
 
 // exports
 
@@ -9206,7 +9206,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.avatar[data-v-6f8b6a0c] {\n    vertical-align: middle;\n    width: 150px;\n    height: 150px;\n    border-radius: 50%;\n}\n.fonts[data-v-6f8b6a0c] {\n    font-size: 15px;\n    color: #ffffff;\n}\n.fonts-line-height[data-v-6f8b6a0c] {\n    line-height: 24px;\n}\n#employee[data-v-6f8b6a0c] {\n    font-family: Arial, Helvetica, sans-serif;\n    border-collapse: collapse;\n    width: 100%;\n}\n#employee td[data-v-6f8b6a0c], #employee th[data-v-6f8b6a0c] {\n    border: 1px solid #ddd;\n    padding: 8px;\n}\n#employee tr[data-v-6f8b6a0c]:nth-child(even){background-color: #f2f2f2;}\n#employee tr[data-v-6f8b6a0c]:hover {background-color: #ddd;}\n#employee th[data-v-6f8b6a0c] {\n    padding-top: 12px;\n    padding-bottom: 12px;\n    text-align: left;\n    /*background-color: #4CAF50;*/\n    color: black;\n}\n/* changes */\n.card[data-v-6f8b6a0c] {\n    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n    max-width: 600px;\n    margin: auto;\n    text-align: center;\n    font-family: arial;\n}\n.title[data-v-6f8b6a0c] {\n    color: grey;\n    font-size: 18px;\n}\nbutton[data-v-6f8b6a0c] {\n    border: none;\n    outline: 0;\n    display: inline-block;\n    padding: 8px;\n    color: white;\n    background-color: #000;\n    text-align: center;\n    cursor: pointer;\n    width: 100%;\n    font-size: 18px;\n}\na[data-v-6f8b6a0c] {\n    text-decoration: none;\n    font-size: 22px;\n    color: black;\n}\nbutton[data-v-6f8b6a0c]:hover, a[data-v-6f8b6a0c]:hover {\n    opacity: 0.7;\n}\n", ""]);
+exports.push([module.i, "\n.avatar[data-v-6f8b6a0c] {\r\n    vertical-align: middle;\r\n    width: 150px;\r\n    height: 150px;\r\n    border-radius: 50%;\n}\n.fonts[data-v-6f8b6a0c] {\r\n    font-size: 15px;\r\n    color: #ffffff;\n}\n.fonts-line-height[data-v-6f8b6a0c] {\r\n    line-height: 24px;\n}\n#employee[data-v-6f8b6a0c] {\r\n    font-family: Arial, Helvetica, sans-serif;\r\n    border-collapse: collapse;\r\n    width: 100%;\n}\n#employee td[data-v-6f8b6a0c], #employee th[data-v-6f8b6a0c] {\r\n    border: 1px solid #ddd;\r\n    padding: 8px;\n}\n#employee tr[data-v-6f8b6a0c]:nth-child(even){background-color: #f2f2f2;}\n#employee tr[data-v-6f8b6a0c]:hover {background-color: #ddd;}\n#employee th[data-v-6f8b6a0c] {\r\n    padding-top: 12px;\r\n    padding-bottom: 12px;\r\n    text-align: left;\r\n    /*background-color: #4CAF50;*/\r\n    color: black;\n}\r\n/* changes */\n.card[data-v-6f8b6a0c] {\r\n    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\r\n    max-width: 600px;\r\n    margin: auto;\r\n    text-align: center;\r\n    font-family: arial;\n}\n.title[data-v-6f8b6a0c] {\r\n    color: grey;\r\n    font-size: 18px;\n}\nbutton[data-v-6f8b6a0c] {\r\n    border: none;\r\n    outline: 0;\r\n    display: inline-block;\r\n    padding: 8px;\r\n    color: white;\r\n    background-color: #000;\r\n    text-align: center;\r\n    cursor: pointer;\r\n    width: 100%;\r\n    font-size: 18px;\n}\na[data-v-6f8b6a0c] {\r\n    text-decoration: none;\r\n    font-size: 22px;\r\n    color: black;\n}\nbutton[data-v-6f8b6a0c]:hover, a[data-v-6f8b6a0c]:hover {\r\n    opacity: 0.7;\n}\r\n", ""]);
 
 // exports
 
@@ -9244,7 +9244,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n#employee[data-v-96de36fc] {\n    font-family: Arial, Helvetica, sans-serif;\n    border-collapse: collapse;\n    width: 100%;\n}\n#employee td[data-v-96de36fc], #employee th[data-v-96de36fc] {\n    border: 1px solid #ddd;\n    padding: 8px;\n}\n#employee tr[data-v-96de36fc]:nth-child(even){background-color: #f2f2f2;}\n#employee tr[data-v-96de36fc]:hover {background-color: #ddd;}\n#employee th[data-v-96de36fc] {\n    padding-top: 12px;\n    padding-bottom: 12px;\n    text-align: left;\n    background-color: #000000;\n    color: white;\n}\n.manage-font[data-v-96de36fc] {\n    font-size: 15px;\n}\n.new-doctor[data-v-96de36fc] {\n    font-size: 24px;\n}\n", ""]);
+exports.push([module.i, "\n#employee[data-v-96de36fc] {\r\n    font-family: Arial, Helvetica, sans-serif;\r\n    border-collapse: collapse;\r\n    width: 100%;\n}\n#employee td[data-v-96de36fc], #employee th[data-v-96de36fc] {\r\n    border: 1px solid #ddd;\r\n    padding: 8px;\n}\n#employee tr[data-v-96de36fc]:nth-child(even){background-color: #f2f2f2;}\n#employee tr[data-v-96de36fc]:hover {background-color: #ddd;}\n#employee th[data-v-96de36fc] {\r\n    padding-top: 12px;\r\n    padding-bottom: 12px;\r\n    text-align: left;\r\n    background-color: #000000;\r\n    color: white;\n}\n.manage-font[data-v-96de36fc] {\r\n    font-size: 15px;\n}\n.new-doctor[data-v-96de36fc] {\r\n    font-size: 24px;\n}\r\n", ""]);
 
 // exports
 
@@ -9263,7 +9263,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.manage-font[data-v-321fe97c] {\n    font-size: 15px;\n}\n.new-doctor[data-v-321fe97c] {\n    font-size: 24px;\n}\n", ""]);
+exports.push([module.i, "\n.manage-font[data-v-321fe97c] {\r\n    font-size: 15px;\n}\n.new-doctor[data-v-321fe97c] {\r\n    font-size: 24px;\n}\r\n", ""]);
 
 // exports
 
@@ -62367,8 +62367,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\webmedical\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\webmedical\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\xampp\htdocs\webMedical\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\xampp\htdocs\webMedical\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
