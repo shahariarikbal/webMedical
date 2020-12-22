@@ -7,45 +7,39 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <span class="new-doctor">Employee Trash List</span>
+                                    <span class="new-doctor">Blood Donor Trash List</span>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="text" class="form-control" name="search" v-model="search" placeholder="Search Doctor Phone">
+                                    <input type="text" class="form-control" name="search" v-model="search" placeholder="Search Blood Donor Phone">
                                 </div>
                                 <div class="col-md-4">
-                                    <router-link to="/employee/manage" class=""> <span class="btn btn-sm btn-primary pull-right manage-font">Employee Manage</span></router-link>
+                                    <router-link to="/blood-donor/list/info" class=""> <span class="btn btn-sm btn-primary pull-right manage-font">Manage Blood Donor</span></router-link>
                                 </div>
                             </div>
                             <br/>
                             <table id="employee">
                                 <tr>
                                     <th width="5%">SL</th>
-                                    <th width="10%">Avatar</th>
                                     <th width="15%">Name</th>
-                                    <th width="25%">Designation</th>
-                                    <th width="10%">Salary</th>
-                                    <th width="15%">Phone</th>
+                                    <th width="25%">Phone</th>
+                                    <th width="10%">Address</th>
                                     <th width="25%">Action</th>
                                 </tr>
-                                <tbody v-if="trashedEmployeePages.length > 0">
-                                <tr v-for="(employee, index) in trashedEmployeePages[currentPage -1]" :key="employee.id" style="border: 1px solid #000000; padding: 50px;">
+                                <tbody v-if="trashedBloodDonorPages.length > 0">
+                                <tr v-for="(bloodDonor, index) in trashedBloodDonorPages[currentPage -1]" :key="bloodDonor.id" style="border: 1px solid #000000; padding: 50px;">
                                     <td>{{ index+1 }}</td>
                                     <td>
-                                        <img :src="'/employees/' + employee.avatar" alt="avatar" style="width: 50px; height: 50px"><br/>
+                                        <span style="text-transform: capitalize">{{ bloodDonor.name }}</span>
                                     </td>
                                     <td>
-                                        <span style="text-transform: capitalize">{{ employee.name }}</span>
+                                        <span style="text-transform: uppercase; font-weight: bold">{{ bloodDonor.phone }}</span>
                                     </td>
+                                    <td>{{ bloodDonor.address }}</td>
                                     <td>
-                                        <span style="text-transform: uppercase; font-weight: bold">{{ employee.designation }}</span>
-                                    </td>
-                                    <td>{{ employee.salary }}</td>
-                                    <td>{{ employee.phone }}</td>
-                                    <td>
-                                        <button type="button" class="btn btn-sm btn-warning" @click="restore(employee, index)">
+                                        <button type="button" class="btn btn-sm btn-warning" @click="restore(bloodDonor.id)">
                                             <i class="fa fa-refresh"></i>
                                         </button>
-                                        <button type="button" class="btn btn-sm btn-danger" @click="destroy(employee, index)">
+                                        <button type="button" class="btn btn-sm btn-danger" @click="destroy(bloodDonor.id)">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </td>
@@ -86,8 +80,8 @@
 export default {
     data () {
         return {
-            trashedEmployees: [],
-            trashedEmployeePages: [],
+            trashedBloodDonors: [],
+            trashedBloodDonorPages: [],
             perPage: 10,
             pageCount: 1,
             currentPage: 1,
@@ -98,11 +92,11 @@ export default {
     watch: {
         search (value) {
             this.setCurrentPage(1)
-            this.generatePages(this.trashedEmployees)
+            this.generatePages(this.trashedBloodDonors)
             if (this.search != '') {
-                let search = this.trashedEmployees.filter(employee => {
-                    if (employee.phone.indexOf(this.search) !== -1) {
-                        return employee
+                let search = this.trashedBloodDonors.filter(bloodDonor => {
+                    if (bloodDonor.phone.indexOf(this.search) !== -1) {
+                        return bloodDonor
                     }
                 })
                 this.generatePages(search)
@@ -110,36 +104,39 @@ export default {
         }
     },
     created() {
-        //console.log('tets')
-        axios.get('/employee/all/trashed/data')
-            .then(response => {
-                //console.log(response.data)
-                this.trashedEmployees = response.data
-                this.generatePages(this.trashedEmployees)
-            }).catch(error => {
-            console.log(error)
-        })
+        this.getTrashed()
     },
     methods : {
-        destroy(employee, index) {
-            alert('Are You Sure Delete this ?')
-            axios.get('/employee/permanent/destroy/' + employee.id)
+        getTrashed(){
+                axios.get('/blood-donor/all/trashed/data')
                 .then(response => {
-                    this.trashedEmployees.splice(index, 1)
-                    flash('Employee has been permanently deleted')
-                    this.generatePages(this.trashedEmployees)
+                    this.trashedBloodDonors = response.data
+                    this.generatePages(this.trashedBloodDonors)
+                }).catch(error => {
+                console.log(error)
+            })
+        },
+        destroy(id) {
+            let res = confirm('Are you sure to delete this permanently')
+            if (res == true) {
+                axios.get('/blood-donor/permanent/destroy/' + id)
+                .then(response => {
+                    flash('Blood Donor has been permanently deleted')
+                    this.getTrashed()
+                    this.generatePages(this.trashedBloodDonors)
                 })
                 .catch(error => {
                     console.log(error)
                 })
+            }
 
         },
-        restore(employee, index) {
-            axios.get('/employee/restore/' + employee.id)
+        restore(id) {
+            axios.get('/blood-donor/restore/' + id)
                 .then(response => {
-                    this.trashedEmployees.splice(index, 1)
-                    flash('Employee restore successfully')
-                    this.generatePages(this.trashedEmployees)
+                    this.getTrashed()
+                    flash('Blood Donor restored successfully')
+                    this.generatePages(this.trashedBloodDonors)
                 })
                 .catch(error => {
                     console.log(error)
@@ -149,13 +146,13 @@ export default {
         setCurrentPage (page) {
             this.currentPage = page
         },
-        generatePages (trashedEmployees) {
-            this.trashedEmployeePages = _.chunk(trashedEmployees, this.perPage)
+        generatePages (trashedBloodDonors) {
+            this.trashedBloodDonorPages = _.chunk(trashedBloodDonors, this.perPage)
 
             this.pageCount = 0
-            this.pageCount = this.trashedEmployeePages.length
+            this.pageCount = this.trashedBloodDonorPages.length
             if (this.pageCount === 0) {
-                this.message = "Sorry! No trashed employee name found"
+                this.message = "Sorry! No trashed Blood Donor name found"
             }
         },
     }

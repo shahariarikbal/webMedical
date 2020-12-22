@@ -3,44 +3,27 @@
         <div class="col-md-12">
             <div class="panel">
                 <div class="panel-body" style="margin-bottom: 50px;">
-                    <router-link to="/employee/manage"> <span class="btn btn-sm btn-primary pull-right fonts">Manage Employee</span></router-link>
+                    <router-link to="/employee/manage"> <span class="btn btn-sm btn-primary pull-right fonts">Manage Blood Donor</span></router-link>
                     <div class="row">
                         <div class="card">
-                            <h2 style="padding-top:20px; text-transform: uppercase; color: orangered">Employee profile</h2>
-                            <img :src="'/employees/' + avatar" style="margin-top:10px;" class="avatar">
-                            <h1 style="text-transform: capitalize">{{ name }}</h1>
-                            <p class="title"> <strong style="text-transform: uppercase">( {{ designation }} )</strong></p>
+                            <h2 style="padding-top:20px; text-transform: uppercase; color: orangered">Blood Donor profile</h2>
                             <center>
                                 <table style="margin-top:10px;margin-bottom:10px; line-height: 30px;">
+                                    <tr>
+                                        <th>Name :</th>
+                                        <td><span style="margin-left: 20px;">{{ name }}</span></td>
+                                    </tr>
                                     <tr>
                                         <th>Phone :</th>
                                         <td><span style="margin-left: 20px;">{{ phone }}</span></td>
                                     </tr>
                                     <tr>
-                                        <th>Email :</th>
-                                        <td><span style="margin-left: 20px;">{{ email }}</span></td>
-                                    </tr>
-                                    <tr>
-                                        <th>NID :</th>
-                                        <td><span style="margin-left: 20px;">{{ nid_no }} Tk.</span></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Joining Date : </th>
-                                        <td>
-                                            <span style="margin-left: 20px;">{{ joining_date }}</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Date of Birth : </th>
-                                        <td> <span style="margin-left: 20px;">{{ dob }}</span></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Salary : </th>
-                                        <td> <span style="margin-left: 20px;">{{ salary }} BDT.</span></td>
+                                        <th>Address :</th>
+                                        <td><span style="margin-left: 20px;">{{ address }}</span></td>
                                     </tr>
                                 </table>
                             </center>
-                            <router-link to="/employee/manage" style="color:white;"><button>Go back</button></router-link>
+                            <router-link to="/blood-donor/list/info" style="color:white;"><button>Go back</button></router-link>
                         </div>
 
                     </div>
@@ -56,61 +39,26 @@ import Loading from "vue-loading-overlay";
 export default {
     data() {
         return {
-            // Condition
-            isLoading: false,
-            fullPage: true,
-            editMode: false,
-            buttonMode: false,
-            titleMode: false,
-            seen : false,
-
-            // Store
-            id: '',
             name : '',
-            email : '',
             phone : '',
-            designation : '',
-            joining_date : '',
-            salary : '',
-            dob : '',
-            nid_no: '',
-            avatar: '',
-
-            //Error Generate
-            errorCount: 0,
-            nameError : '',
-            emailError : '',
-            phoneError : '',
-            nidError : '',
-            designationError : '',
-            joining_dateError : '',
-            salaryError : '',
-            avatarError: '',
-            dobError: '',
+            address : '',
         }
     },
     created() {
-        this.viewEmployee()
+        this.viewBloodDonor()
     },
     components: {
         Loading
     },
     methods: {
-        viewEmployee () {
-            axios.get(`/employee/view/${this.$route.params.id}`)
+        viewBloodDonor () {
+            axios.get(`/blood-donor/view/${this.$route.params.id}`)
                 .then(response => {
-                    this.id            = response.data.id,
                     this.name          = response.data.name,
-                    this.email         = response.data.email,
                     this.phone         = response.data.phone,
-                    this.nid_no        = response.data.nid_no,
-                    this.designation   = response.data.designation,
-                    this.joining_date  = response.data.joining_date,
-                    this.dob           = response.data.dob,
-                    this.salary        = response.data.salary,
-                    this.avatar        = response.data.avatar
+                    this.address        = response.data.address
                 }).catch(error => {
-                console.log(error)
+                    console.log(error)
             })
         },
     }
@@ -118,12 +66,6 @@ export default {
 </script>
 
 <style scoped>
-.avatar {
-    vertical-align: middle;
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-}
 .fonts {
     font-size: 15px;
     color: #ffffff;

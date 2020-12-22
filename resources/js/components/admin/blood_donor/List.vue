@@ -35,13 +35,13 @@
                                     <td>{{ bloodDonor.phone }}</td>
                                     <td>{{ bloodDonor.address }}</td>
                                     <td style="width: 15%">
-                                        <router-link :to="`/bloodDonor/details/info/${bloodDonor.id}`" class="btn btn-sm btn-primary">
+                                        <router-link :to="`/blood-donor/details/info/${bloodDonor.id}`" class="btn btn-sm btn-primary">
                                             <i class="fa fa-eye"></i>
                                         </router-link>
-                                        <router-link :to="`/bloodDonor/edit/info/${bloodDonor.id}`" type="button" class="btn btn-sm btn-success">
+                                        <router-link :to="`/blood-donor/edit/info/${bloodDonor.id}`" type="button" class="btn btn-sm btn-success">
                                             <i class="fa fa-edit"></i>
                                         </router-link>
-                                        <button type="button" class="btn btn-sm btn-danger" @click="destroy(bloodDonor, index)">
+                                        <button type="button" class="btn btn-sm btn-danger" @click="destroy(bloodDonor.id)">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </td>
@@ -106,27 +106,32 @@ export default {
         }
     },
     created() {
-        axios.get('/blood-donor/list')
-            .then(response => {
-                this.bloodDonors = response.data
-                //console.log(response)
-                this.generatePages(this.bloodDonors)
-            }).catch(error => {
-            console.log(error)
-        })
+        this.getBloodDonors()
     },
     methods : {
-        destroy(bloodDonor, index) {
-            alert('Are You Sure Delete this ?')
-            axios.get('/bloodDonor/destroy/' + bloodDonor.id)
+        getBloodDonors(){
+                axios.get('/blood-donor/list')
                 .then(response => {
-                    this.bloodDonors.splice(index, 1)
+                    this.bloodDonors = response.data
+                    //console.log(response)
+                    this.generatePages(this.bloodDonors)
+                }).catch(error => {
+                console.log(error)
+            })
+        },
+        destroy(id) {
+            let res = confirm('Are You Sure Delete this ?')
+            if(res == true){
+                axios.get('/blood-donor/destroy/' + id)
+                .then(response => {
                     flash('BloodDonor has been deleted')
+                    this.getBloodDonors()
                     this.generatePages(this.bloodDonors)
                 })
                 .catch(error => {
                     console.log(error)
                 })
+            }
 
         },
         setCurrentPage (page) {

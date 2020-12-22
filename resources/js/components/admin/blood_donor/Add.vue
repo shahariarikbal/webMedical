@@ -127,7 +127,27 @@ export default {
             })
         },
         update() {
-
+            this.isLoading = true
+            axios.post('/blood-donor/update',{
+                name : this.name,
+                phone : this.phone,
+                address : this.address,
+                id : this.id,
+            })
+            .then(response => {
+                if (response.status === 200) {
+                    this.isLoading = false
+                    flash('Blood Donor updated successfully')
+                    this.$router.push('/blood-donor/list/info')
+                }
+            }).catch(error => {
+                if (error.response.status === 422) {
+                    this.isLoading = false
+                    this.nameError = 'Name field is required'
+                    this.phoneError = 'Phone field is required'
+                    this.addressError = 'Address field is required'
+                }
+            })
         }
     }
 }

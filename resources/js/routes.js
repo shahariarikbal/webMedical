@@ -10,8 +10,11 @@ import AddNewEmployee from './components/admin/employee/Add.vue'
 import EmployeeList from './components/admin/employee/List.vue'
 import EmployeeDetails from './components/admin/employee/Details.vue'
 import EmployeeTrashList from './components/admin/employee/Trash.vue'
+
 import AddNewBloodDonor from './components/admin/blood_donor/Add.vue'
 import BloodDonorList from './components/admin/blood_donor/List.vue'
+import BloodDonorDetails from './components/admin/blood_donor/Details.vue'
+import BloodDonorTrash from './components/admin/blood_donor/Trash.vue'
 
 export const routes = [
     {
@@ -81,6 +84,18 @@ export const routes = [
     {
         path: '/blood-donor/list/info',
         component: BloodDonorList,
-    }
+    },
+    {
+        path: '/blood-donor/details/info/:id',
+        component: BloodDonorDetails,
+    },
+    {
+        path: '/blood-donor/edit/info/:id',
+        component: AddNewBloodDonor,
+    },
+    {
+        path: '/blood-donor/trash/info',
+        component: BloodDonorTrash,
+    },
 
 ]

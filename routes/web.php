@@ -79,10 +79,13 @@ Route::group(['prefix' => 'employee/'], function () {
 
 Route::group(['prefix' => 'blood-donor/'], function () {
     Route::post('store', 'BloodDonorController@store')->name('blood.donor.store');
+    Route::post('update', 'BloodDonorController@update');
     Route::get('list','BloodDonorController@bloodDonorList');
-    // Route::get('edit/{id}', 'BloodDonorController@edit')->name('blood.donor.edit');
+    Route::get('view/{id}', 'BloodDonorController@view');
+    Route::get('edit/{id}', 'BloodDonorController@view');
+    Route::get('destroy/{id}', 'BloodDonorController@destroy');
+    Route::get('all/trashed/data','BloodDonorController@trashList');
+    Route::get('permanent/destroy/{id}','BloodDonorController@permanentDestroy');
+    Route::get('restore/{id}','BloodDonorController@restore');
     Route::get('{path}', 'DashboardController@index')->where( 'path', '.*' );
 });
-
-
-
