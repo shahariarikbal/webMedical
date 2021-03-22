@@ -15,6 +15,7 @@ import {routes} from './routes'
 Vue.component('flash', require('./components/Flash.vue').default);
 Vue.component('client-registration', require('./clients/Registration.vue').default);
 Vue.component('admin-main', require('./components/admin/Master.vue').default);
+Vue.component('contact', require('./components/admin/contact/contact.vue').default);
 
 import Paginate from 'vuejs-paginate'
 Vue.component('paginate', Paginate)

@@ -39,15 +39,24 @@
                                         <td>{{ doctor.email }}</td>
                                         <td>{{ doctor.phone }}</td>
                                         <td>
-                                            <router-link :to="`/clients/doctor/details/info/${doctor.id}`" class="btn btn-sm btn-primary">
-                                                <i class="fa fa-eye"></i>
-                                            </router-link>
-                                            <router-link :to="`/clients/doctor/edit/info/${doctor.id}`" type="button" class="btn btn-sm btn-success">
-                                                <i class="fa fa-edit"></i>
-                                            </router-link>
-                                            <button type="button" class="btn btn-sm btn-danger" @click="destroy(doctor, index)">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
+                                            <div class="dropdown show">
+                                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink+doctor.id" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Dropdown link
+                                                </a>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink+doctor.id" style="background-tranparent;">
+                                                    <center>
+                                                    <router-link :to="`/clients/doctor/details/info/${doctor.id}`" class="btn btn-sm btn-primary" style="width: 106px;">
+                                                        View Doctor
+                                                    </router-link>
+                                                    <router-link :to="`/clients/doctor/edit/info/${doctor.id}`" type="button" class="btn btn-sm btn-success" style="width: 106px;">
+                                                        Edit Doctor
+                                                    </router-link>
+                                                    <button type="button" class="btn btn-sm btn-danger" @click="destroy(doctor, index)" style="width: 106px;">
+                                                        Delete Doctor
+                                                    </button>
+                                                    </center>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -88,7 +97,7 @@ export default {
         return {
             doctors: [],
             doctorsPages: [],
-            perPage: 1,
+            perPage: 10,
             pageCount: 1,
             currentPage: 1,
             search: '',
@@ -170,7 +179,7 @@ export default {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background-color: #4CAF50;
+    background-color: black;
     color: white;
 }
 .manage-font {

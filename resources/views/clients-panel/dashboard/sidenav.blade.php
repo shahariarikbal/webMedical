@@ -1,6 +1,19 @@
 <nav class="example">
     <ul class="nav">
         <li>
+            <div style="margin-top: 36px;
+    margin-bottom: 36px;">
+           <div class="card">
+             <div class="card-body">
+                 <center>
+                   <img src="{{ asset('logos/'.$client->logo) }}" alt="Logo" style="height: 81px; width: 220px;height: 75px;width: 75px;border-radius: 100px;" class="rounded mx-auto d-block">
+                   <h4 style="color: white;">{{ $client->name }}</h4>
+                 </center>
+             </div>
+           </div>
+            </div>
+        </li>
+        <li>
             <router-link to="/clients/dashboard" class=""><i class="lnr lnr-home"></i> <span>Dashboard</span></router-link>
         </li>
         <li>

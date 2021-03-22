@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container-fluid">
         <div class="col-md-12">
             <div class="panel">
                 <div class="panel-body" style="margin-bottom: 50px;">
@@ -88,7 +88,7 @@ export default {
             this.cabin       = response.data.cabin
             this.bed         = response.data.bed
             this.disease     = response.data.disease
-            if(response.data.sex === 1){
+            if(response.data.sex === 0){
                 this.sex = 'Male'
             }else{
                 this.sex = 'Female'

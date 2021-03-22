@@ -43,15 +43,24 @@
                                     <td>{{ employee.salary }}</td>
                                     <td>{{ employee.phone }}</td>
                                     <td>
-                                        <router-link :to="`/employee/details/info/${employee.id}`" class="btn btn-sm btn-primary">
-                                            <i class="fa fa-eye"></i>
-                                        </router-link>
-                                        <router-link :to="`/employee/edit/info/${employee.id}`" type="button" class="btn btn-sm btn-success">
-                                            <i class="fa fa-edit"></i>
-                                        </router-link>
-                                        <button type="button" class="btn btn-sm btn-danger" @click="destroy(employee, index)">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
+                                        <div class="dropdown show">
+                                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink+employee.id" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Dropdown link
+                                                </a>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink+employee.id" style="background-transparent;">
+                                                    <center>
+                                                    <router-link :to="`/employee/details/info/${employee.id}`" style="width: 106px;" class="btn btn-sm btn-primary">
+                                                        View Employee
+                                                    </router-link>
+                                                    <router-link :to="`/employee/edit/info/${employee.id}`" type="button" style="width: 106px;" class="btn btn-sm btn-success">
+                                                        Edit Employee
+                                                    </router-link>
+                                                    <button type="button" style="width: 106px;" class="btn btn-sm btn-danger" @click="destroy(employee, index)">
+                                                        Delete Employee
+                                                    </button>
+                                                    </center>
+                                                </div>
+                                        </div>
                                     </td>
                                 </tr>
                                 </tbody>

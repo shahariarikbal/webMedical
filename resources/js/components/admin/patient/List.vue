@@ -39,15 +39,24 @@
                                         <td v-if="patient.sex===0">Male</td>
                                         <td v-else>Female</td>
                                         <td>
-                                            <router-link :to="`/patient/details/info/${patient.id}`" class="btn btn-sm btn-primary">
-                                                <i class="fa fa-eye"></i>
-                                            </router-link>
-                                            <router-link :to="`/patient/edit/info/${patient.id}`" type="button" class="btn btn-sm btn-success">
-                                                <i class="fa fa-edit"></i>
-                                            </router-link>
-                                            <button type="button" class="btn btn-sm btn-danger" @click="destroy(patient.id)">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
+                                            <div class="dropdown show">
+                                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink+patient.id" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Dropdown link
+                                                </a>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink+patient.id" style="background-transparent;">
+                                                    <center>
+                                                    <router-link :to="`/patient/details/info/${patient.id}`" style="width:106px;" class="btn btn-sm btn-primary">
+                                                        View Patient
+                                                    </router-link>
+                                                    <router-link :to="`/patient/edit/info/${patient.id}`" type="button" style="width:106px;" class="btn btn-sm btn-success">
+                                                        Edit Patient
+                                                    </router-link>
+                                                    <button type="button" style="width:106px;" class="btn btn-sm btn-danger" @click="destroy(patient.id)">
+                                                        Delete Patient
+                                                    </button>
+                                                    </center>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -175,7 +184,7 @@ export default {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background-color: #4CAF50;
+    background-color: black;
     color: white;
 }
 .manage-font {

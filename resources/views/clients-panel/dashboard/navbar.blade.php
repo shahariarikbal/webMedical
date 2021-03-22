@@ -19,6 +19,7 @@
                         <li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
                         <li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
                         <li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
+                        <li><router-link to="/settings/about"><i class="lnr lnr-cog"></i> <span>About</span></router-link></li>
                         <li>
                             <a href="{{ route('logout') }}"
                                onclick="event.preventDefault();

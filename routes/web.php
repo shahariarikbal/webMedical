@@ -15,6 +15,7 @@
 Route::get('/', function () {
     return view('home');
 });
+Route::post('/contact/send', 'ContactController@send');
 
 Route::get('config-clear', function () {
     \Artisan::call('cache:clear');
@@ -88,4 +89,13 @@ Route::group(['prefix' => 'blood-donor/'], function () {
     Route::get('permanent/destroy/{id}','BloodDonorController@permanentDestroy');
     Route::get('restore/{id}','BloodDonorController@restore');
     Route::get('{path}', 'DashboardController@index')->where( 'path', '.*' );
+});
+
+
+// Undone
+Route::group(['prefix' => '/settings/'], function() {
+    Route::get('about', 'DashboardController@index');
+    Route::get('get_about', 'AboutController@getAbout');
+    Route::post('store', 'AboutController@store');
+    Route::post('update', 'AboutController@update');
 });

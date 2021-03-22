@@ -35,15 +35,24 @@
                                     <td>{{ bloodDonor.phone }}</td>
                                     <td>{{ bloodDonor.address }}</td>
                                     <td style="width: 15%">
-                                        <router-link :to="`/blood-donor/details/info/${bloodDonor.id}`" class="btn btn-sm btn-primary">
-                                            <i class="fa fa-eye"></i>
-                                        </router-link>
-                                        <router-link :to="`/blood-donor/edit/info/${bloodDonor.id}`" type="button" class="btn btn-sm btn-success">
-                                            <i class="fa fa-edit"></i>
-                                        </router-link>
-                                        <button type="button" class="btn btn-sm btn-danger" @click="destroy(bloodDonor.id)">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
+                                        <div class="dropdown show">
+                                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink+bloodDonor.id" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Dropdown link
+                                                </a>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink+bloodDonor.id" style="background-transparent;">
+                                                    <center>
+                                                    <router-link :to="`/blood-donor/details/info/${bloodDonor.id}`" style="width: 106px;" class="btn btn-sm btn-primary">
+                                                        View Blood Donor
+                                                    </router-link>
+                                                    <router-link :to="`/blood-donor/edit/info/${bloodDonor.id}`" type="button" style="width: 106px;" class="btn btn-sm btn-success">
+                                                        Edit Blood Donor
+                                                    </router-link>
+                                                    <button type="button" style="width: 106px;" class="btn btn-sm btn-danger" @click="destroy(bloodDonor.id)">
+                                                        Delete Blood Donor
+                                                    </button>
+                                                    </center>
+                                                </div>
+                                        </div>
                                     </td>
                                 </tr>
                                 </tbody>

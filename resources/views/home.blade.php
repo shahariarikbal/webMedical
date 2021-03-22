@@ -168,28 +168,14 @@
         </div>
     </section>
     <!--/testimonials-->
-    <section class="w3l-free-consultion">
+    <section class="w3l-free-consultion" id="app">
         <div class="container">
             <div class="consultation-grids">
                 <div class="apply-form">
                     <h5>Frequently Ask About WebMedical</h5>
-                    <form action="#" method="post">
-                        <div class="admission-form">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Full Name*" required="">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Phone Number*" required="">
-                            </div>
-                            <div class="form-group">
-                                <input type="email" class="form-control" placeholder="Email*" required="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <textarea name="Comment" class="form-control" placeholder="Message*" required=""></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary submit">Get a Free Consultation</button>
-                    </form>
+                    
+                    <contact></contact>
+
                 </div>
                 <div class="consultation-img">
                     <img src="{{ asset('/fontend/') }}/assets/images/ab.jpg" class="img-fluid" alt="/">

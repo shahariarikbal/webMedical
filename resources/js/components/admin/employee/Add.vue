@@ -55,6 +55,7 @@
                                 <div class="form-group">
                                     <label>Joining Date</label>
                                     <input type="date" name="joining_date" v-model="joining_date" class="form-control" placeholder="Employee joining date">
+                                    <span class="text-black">{{joining_date}}</span>
                                     <span class="text-danger">{{joining_dateError}}</span>
                                 </div>
                             </div>
@@ -71,6 +72,7 @@
                                     <label>Date Of Birth <small style="color: red">( According to Certificate )</small></label>
                                     <input type="date" name="dob" v-model="dob" class="form-control" placeholder="Employee dob">
                                     <span class="text-danger">{{dobError}}</span>
+                                    <span class="text-black">{{joining_date}}</span>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -232,6 +234,7 @@ export default {
                     this.nidError = error.response.data.errors.nid_no
                     this.designationError = error.response.data.errors.designation
                     this.joining_dateError = error.response.data.errors.joining_date
+                    this.dobError = error.response.data.errors.dob
                     this.salaryError = error.response.data.errors.salary
                     this.avatarError = error.response.data.errors.avatar
                 }

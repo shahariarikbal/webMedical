@@ -97,7 +97,8 @@
                                         <option value="0">Male</option>
                                         <option value="1">Female</option>
                                         </select>
-                                        <span>Selected: {{ sex }}</span>
+                                        <span v-show="sex == 0">Selected: Male</span>
+                                        <span v-show="sex == 1">Selected: Female</span>
                                     <span class="text-danger">{{sexError}}</span>
                                 </div>
                             </div>
@@ -181,11 +182,7 @@ name: "Add",
                this.cabin       = response.data.cabin
                this.bed = response.data.bed
                this.diseas = response.data.disease
-               if(response.data.sex === 1){
-                   this.sex = 'Male'
-               }else{
-                   this.sex = 'Female'
-               }
+               this.sex = response.data.sex
             }
            })
            .catch(error =>{

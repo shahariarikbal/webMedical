@@ -16,6 +16,8 @@ import BloodDonorList from './components/admin/blood_donor/List.vue'
 import BloodDonorDetails from './components/admin/blood_donor/Details.vue'
 import BloodDonorTrash from './components/admin/blood_donor/Trash.vue'
 
+import AboutUs from './components/admin/About.vue'
+
 export const routes = [
     {
         path:'/clients/dashboard',
@@ -96,6 +98,10 @@ export const routes = [
     {
         path: '/blood-donor/trash/info',
         component: BloodDonorTrash,
+    },
+    {
+        path: '/settings/about',
+        component: AboutUs,
     },
 
 ]
