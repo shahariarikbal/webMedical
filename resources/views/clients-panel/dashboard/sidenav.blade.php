@@ -8,7 +8,7 @@
             <div id="patientPages" class="collapse ">
                 <ul class="nav">
                     <li>
-                        <router-link to="/patient/create" class=""><i class="lnr lnr-code"></i> <span>Registration</span></router-link>
+                        <router-link to="/patient/create" class="w"><i class="lnr lnr-code"></i> <span>Registration</span></router-link>
                     </li>
                     <li>
                         <router-link to="/patient/list" class=""><i class="lnr lnr-code"></i> <span>Manage Patient</span></router-link>

@@ -6,7 +6,7 @@
                      :on-cancel="onCancel"
                      :is-full-page="fullPage"></loading>
             <div class="card-header bg-primary">
-                <span class="reg-text-font" style="margin-left: 40px; color: white">Client Registration Form</span>
+                <span class="reg-text-font" style="margin-left: 40px; color: white; font-size: 1.25rem">Client Registration Form</span>
             </div>
             <div class="card-body">
                 <form method="POST" @submit.prevent="registration()" enctype="multipart/form-data" name="clientForm">

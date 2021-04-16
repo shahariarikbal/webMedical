@@ -41688,7 +41688,11 @@ var staticRenderFns = [
         "span",
         {
           staticClass: "reg-text-font",
-          staticStyle: { "margin-left": "40px", color: "white" }
+          staticStyle: {
+            "margin-left": "40px",
+            color: "white",
+            "font-size": "1.25rem"
+          }
         },
         [_vm._v("Client Registration Form")]
       )
